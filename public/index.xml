@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Jared MacShane</title>
+    <link>http://localhost:59481/</link>
+    <description>Recent content on Jared MacShane</description>
+    <generator>Hugo -- 0.143.1</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 13 Feb 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:59481/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>About</title>
+      <link>http://localhost:59481/about/</link>
+      <pubDate>Tue, 13 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:59481/about/</guid>
+      <description>&lt;p&gt;I am a second-year PhD student in the Department of Computer Science at the University of California, Irvine, advised by Professor Nalini Venkatasubramanian. My research focuses on Machine Learning, Systems, and Digital Twin technologies.&lt;/p&gt;
+&lt;h2 id=&#34;research-interests&#34;&gt;Research Interests&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Machine Learning Systems&lt;/li&gt;
+&lt;li&gt;Digital Twin Technology&lt;/li&gt;
+&lt;li&gt;Distributed Systems&lt;/li&gt;
+&lt;li&gt;System Optimization&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;education&#34;&gt;Education&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;PhD in Computer Science, University of California, Irvine (Current)&lt;/li&gt;
+&lt;li&gt;Previous degrees to be added&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;contact&#34;&gt;Contact&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Email: [Your UCI email]&lt;/li&gt;
+&lt;li&gt;Office: [Your office location]&lt;/li&gt;
+&lt;li&gt;Department of Computer Science&lt;/li&gt;
+&lt;li&gt;University of California, Irvine&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>Curriculum Vitae</title>
+      <link>http://localhost:59481/cv/</link>
+      <pubDate>Tue, 13 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:59481/cv/</guid>
+      <description>&lt;p&gt;[A PDF version of my CV can be downloaded here]&lt;/p&gt;
+&lt;h2 id=&#34;education&#34;&gt;Education&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;PhD in Computer Science, University of California, Irvine (Current)
+&lt;ul&gt;
+&lt;li&gt;Advisor: Professor Nalini Venkatasubramanian&lt;/li&gt;
+&lt;li&gt;Research Focus: Machine Learning, Systems, Digital Twin&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;[Previous education to be added]&lt;/p&gt;
+&lt;h2 id=&#34;research-experience&#34;&gt;Research Experience&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Graduate Research Assistant, UCI (Current)
+&lt;ul&gt;
+&lt;li&gt;Digital Twin Systems&lt;/li&gt;
+&lt;li&gt;Machine Learning Systems Optimization&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;[Additional research experience to be added]&lt;/p&gt;
+&lt;h2 id=&#34;teaching-experience&#34;&gt;Teaching Experience&lt;/h2&gt;
+&lt;p&gt;[Teaching experience to be added]&lt;/p&gt;
+&lt;h2 id=&#34;skills&#34;&gt;Skills&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Programming Languages&lt;/li&gt;
+&lt;li&gt;Systems Development&lt;/li&gt;
+&lt;li&gt;Machine Learning Frameworks&lt;/li&gt;
+&lt;li&gt;Research Tools&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;awards-and-honors&#34;&gt;Awards and Honors&lt;/h2&gt;
+&lt;p&gt;[Awards and honors to be added]&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Publications</title>
+      <link>http://localhost:59481/publications/</link>
+      <pubDate>Tue, 13 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:59481/publications/</guid>
+      <description>&lt;h2 id=&#34;conference-papers&#34;&gt;Conference Papers&lt;/h2&gt;
+&lt;p&gt;[Your conference papers will be listed here]&lt;/p&gt;
+&lt;h2 id=&#34;journal-articles&#34;&gt;Journal Articles&lt;/h2&gt;
+&lt;p&gt;[Your journal articles will be listed here]&lt;/p&gt;
+&lt;h2 id=&#34;preprints&#34;&gt;Preprints&lt;/h2&gt;
+&lt;p&gt;[Your preprints will be listed here]&lt;/p&gt;
+&lt;h2 id=&#34;presentations&#34;&gt;Presentations&lt;/h2&gt;
+&lt;p&gt;[Your conference presentations and talks will be listed here]&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Research</title>
+      <link>http://localhost:59481/research/</link>
+      <pubDate>Tue, 13 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:59481/research/</guid>
+      <description>&lt;h2 id=&#34;current-projects&#34;&gt;Current Projects&lt;/h2&gt;
+&lt;h3 id=&#34;digital-twin-systems&#34;&gt;Digital Twin Systems&lt;/h3&gt;
+&lt;p&gt;Research on developing and optimizing digital twin systems for real-world applications.&lt;/p&gt;
+&lt;h3 id=&#34;machine-learning-systems&#34;&gt;Machine Learning Systems&lt;/h3&gt;
+&lt;p&gt;Investigation of system architectures and optimizations for machine learning applications.&lt;/p&gt;
+&lt;h2 id=&#34;research-goals&#34;&gt;Research Goals&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Develop efficient and scalable systems for digital twin applications&lt;/li&gt;
+&lt;li&gt;Optimize machine learning systems for real-world deployment&lt;/li&gt;
+&lt;li&gt;Create novel solutions for distributed system challenges&lt;/li&gt;
+&lt;li&gt;Bridge the gap between theoretical models and practical implementations&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;collaborations&#34;&gt;Collaborations&lt;/h2&gt;
+&lt;p&gt;I work closely with the Distributed Systems and Machine Learning research groups at UCI.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

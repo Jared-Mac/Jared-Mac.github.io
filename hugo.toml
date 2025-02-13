@@ -1,0 +1,54 @@
+baseURL = "https://jared-mac.github.io/"
+title = "Jared MacShane"
+theme = "PaperMod"
+
+[params]
+  defaultTheme = "auto"
+  ShowReadingTime = true
+  ShowShareButtons = false
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+  
+[params.profileMode]
+  enabled = true
+  title = "Jared MacShane"
+  subtitle = "PhD Student at UCI | Machine Learning & Systems Research"
+  imageUrl = "/profile.jpg"
+  imageTitle = "Jared MacShane"
+
+[[params.profileMode.buttons]]
+  name = "Publications"
+  url = "/publications"
+
+[[params.profileMode.buttons]]
+  name = "Research"
+  url = "/research"
+
+[[params.profileMode.buttons]]
+  name = "CV"
+  url = "/cv"
+
+[[menu.main]]
+  identifier = "about"
+  name = "About"
+  url = "/about/"
+  weight = 10
+
+[[menu.main]]
+  identifier = "research"
+  name = "Research"
+  url = "/research/"
+  weight = 20
+
+[[menu.main]]
+  identifier = "publications"
+  name = "Publications"
+  url = "/publications/"
+  weight = 30
+
+[[menu.main]]
+  identifier = "cv"
+  name = "CV"
+  url = "/cv/"
+  weight = 40
