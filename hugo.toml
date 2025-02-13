@@ -1,5 +1,5 @@
 baseURL = "https://jared-mac.github.io/"
-title = "Jared MacShane"
+title = "Jared Macshane"
 theme = "PaperMod"
 
 [params]
@@ -12,10 +12,10 @@ theme = "PaperMod"
   
 [params.profileMode]
   enabled = true
-  title = "Jared MacShane"
-  subtitle = "PhD Student at UCI | Machine Learning & Systems Research"
+  title = "Jared Macshane"
+  subtitle = "PhD Student in Computer Science at UC Irvine | Machine Learning & Systems Research"
   imageUrl = "/profile.jpg"
-  imageTitle = "Jared MacShane"
+  imageTitle = "Jared Macshane"
 
 [[params.profileMode.buttons]]
   name = "Publications"

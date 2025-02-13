@@ -1,0 +1,125 @@
+% Welcome to the simple Undergraduate Complexity Research CV-resume template!
+% Please delete any sections that do not apply to your past experiences. We do not expect that applicants will have itmes for all of the sections included here. You can also rename or revise sections to best fit with your personal accomplishments.
+
+\documentclass[11pt,a4paper,sans]{moderncv}
+
+% moderncv themes
+\moderncvstyle{classic}
+\moderncvcolor{blue}
+
+% character encoding
+\usepackage[utf8]{inputenc}
+
+% adjust the page margins
+\usepackage[scale=0.75]{geometry}
+
+% personal data
+\name{Jared}{Macshane}
+\title{PhD Student in Computer Science}
+% \address{69406 Verano Road}{Irvine, CA 92617}
+\phone[mobile]{(714) 209-5998}
+\email{jaredmacshane@gmail.com}
+
+\begin{document}
+
+\makecvtitle
+
+% Education section
+\section{Education}
+\cventry{2023--Present}{PhD Computer Science}{University of California, Irvine}{}{}{}
+\cventry{2020--2022}{Master of Computer Science}{California State University San Marcos}{}{}{}
+\cventry{2015--2017}{Bachelor of Mathematics}{University of California, Santa Barbara}{}{}{}
+
+% Research Experience section
+\section{Research Experience}
+% \cventry{2024--2024}{Graduate Research Fellow}{Advanced Studies Institute: Coastal Zone Hazards}{Tohoku University, Sendai, Japan}{}{
+% \begin{itemize}
+% \item Selected for NSF-funded international research program on coastal zone hazards
+% \item Engaged in hands-on training in remote sensing, GIS, and disaster science
+% \item Collaborated with global experts on coastal marine geology and tectonic geomorphology
+% \item Developed interdisciplinary skills in earth sciences and data analytics
+% \end{itemize}}
+
+\cventry{2023--Present}{Graduate Research}{University of California, Irvine}{}{}{
+\begin{itemize}
+\item Developing and architecting a Digital Twin for disaster resilience
+\item Reducing communication overhead in Split Computing
+\item Implementing supervised compression techniques for applications
+\item Developing progressive inference models
+\end{itemize}}
+
+\cventry{2023--Present}{Graduate Student Mentor}{Zotbins Undergraduate Research Project}{University of California, Irvine}{}{
+\begin{itemize}
+\item Mentor undergraduate research team developing distributed smart waste bins
+\item Guide project design, goal setting, and implementation strategy
+\item Focus on improving waste diversion rates through IoT and data analytics
+\end{itemize}}
+
+\cventry{2021--2023}{Graduate Research Assistant}{California State University San Marcos}{}{}{
+\begin{itemize}
+\item Developed VR tracking method for Aruco Markers, funding from NSF
+\item Tested custom 3D prints for active tracking
+\item Mentored undergraduate students through development of a object detection model
+\item Integration of model into a usable pipeline
+\end{itemize}}
+
+\cventry{2022}{Master's Thesis}{Using Growing Self-organizing Maps to Construct Trail Networks Using Public GPS Data}{}{}{
+\begin{itemize}
+\item Developed novel learning algorithm to model hiking trail networks from raw GPS data
+\item Growing Self-organizing Map, Edge inference rules, K-d trees
+\item Best Paper Award
+\end{itemize}}
+
+\cventry{2021--2021}{Research Fellow}{San Diego Zoo Wildlife Alliance - Conservation Lab}{}{}{
+\begin{itemize}
+\item Developed computer visison framework (coined cougarvision) for animal detections
+\item Utilizing Object Detector and Image Classifier models
+\item Triggered alerts from cell camera images and live video feeds (multithreading)
+\end{itemize}}
+
+% Other Experience section
+\section{Other Experience}
+\cventry{2023--Current}{Teaching Assistant}{University of California, Irvine}{}{}{
+\begin{itemize}
+\item Hosted lab sections with one-on-one code guidance
+\item Prepared and presented lecture slides
+\end{itemize}}
+
+\cventry{2022--2022}{Machine Learning Consultant}{Ecorithms}{}{}{
+\begin{itemize}
+\item Selected and trained semantic segmentation models on custom datasets
+\item Aided in deployment of inference endpoint
+\end{itemize}}
+
+
+
+% Publications section
+\section{Publications}
+\cvitem{}{Gow, Sean, et al. "Miniaturization and geometric optimization of SteamVR active optical trackers." Optical Architectures for Displays and Sensing in Augmented, Virtual, and Mixed Reality (AR, VR, MR) IV. Vol. 12449. SPIE, 2023.}
+\cvitem{}{Macshane, Jared, and Ali Ahmadinia. "AI Assisted Trail Map Generation based on Public GPS Data." 2023 Systems and Information Engineering Design Symposium (SIEDS). IEEE, 2023.}
+
+% Notable Course Projects section
+\section{Notable Course Projects}
+\cventry{Wildfire Supervised Compression}{CS 256 Systems and ML}{}{}{}{
+\begin{itemize}
+\item Trained a ResNet wildfire image classifier
+\item Used Knowledge Distillation to train an entropy-based image compressor
+\end{itemize}}
+
+\cventry{Generative Fire Modeling}{CS 274E Deep Generative Models}{}{}{}{
+\begin{itemize}
+\item Developed a novel Conditional Variational Autoencoder to predict fire progression using evironmental data
+\end{itemize}}
+
+\cventry{Progressive Inference}{CS 230 Distributed Systems}{}{}{}{
+\begin{itemize}
+\item Implemented and analyzed adding early exits to split computing and measuring accuracy-latency trade-off
+\end{itemize}}
+
+% Specialized Skills section
+\section{Specialized Skills}
+\cvitem{Programming Languages}{Python, C++}
+\cvitem{Tools}{OpenCV, Tensorflow, PyTorch, OpenMMLab, TSAI, AWS, Google Cloud}
+\cvitem{Writing}{\LaTeX, Word, Powerpoint}
+
+\end{document}
