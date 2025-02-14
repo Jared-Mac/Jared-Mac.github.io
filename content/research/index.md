@@ -59,6 +59,3 @@ CS 230 Distributed Systems
 - Create novel solutions for distributed system challenges
 - Bridge the gap between theoretical models and practical implementations
 
-## Collaborations
-
-I work closely with the Distributed Systems and Machine Learning research groups at UCI. 

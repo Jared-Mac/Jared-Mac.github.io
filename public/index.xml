@@ -35,38 +35,40 @@
       <link>http://localhost:1313/cv/</link>
       <pubDate>Tue, 13 Feb 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/cv/</guid>
-      <description>&lt;p&gt;[A PDF version of my CV can be downloaded here]&lt;/p&gt;
+      <description>&lt;p&gt;&lt;a href=&#34;http://localhost:1313/cv.pdf&#34;&gt;Download PDF Version&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;education&#34;&gt;Education&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;PhD in Computer Science, University of California, Irvine (Current)
+&lt;li&gt;
+&lt;p&gt;PhD in Computer Science, University of California, Irvine (2023-Present)&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Advisor: Professor Nalini Venkatasubramanian&lt;/li&gt;
 &lt;li&gt;Research Focus: Machine Learning, Systems, Digital Twin&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;[Previous education to be added]&lt;/p&gt;
-&lt;h2 id=&#34;research-experience&#34;&gt;Research Experience&lt;/h2&gt;
+&lt;li&gt;
+&lt;p&gt;Master of Computer Science, California State University San Marcos (2020-2022)&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Graduate Research Assistant, UCI (Current)
-&lt;ul&gt;
-&lt;li&gt;Digital Twin Systems&lt;/li&gt;
-&lt;li&gt;Machine Learning Systems Optimization&lt;/li&gt;
+&lt;li&gt;Thesis: &amp;ldquo;Using Growing Self-organizing Maps to Construct Trail Networks Using Public GPS Data&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;Best Paper Award at SIEDS 2023&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Bachelor of Mathematics, University of California, Santa Barbara (2015-2017)&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;[Additional research experience to be added]&lt;/p&gt;
-&lt;h2 id=&#34;teaching-experience&#34;&gt;Teaching Experience&lt;/h2&gt;
-&lt;p&gt;[Teaching experience to be added]&lt;/p&gt;
-&lt;h2 id=&#34;skills&#34;&gt;Skills&lt;/h2&gt;
+&lt;h2 id=&#34;research-experience&#34;&gt;Research Experience&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;Programming Languages&lt;/li&gt;
-&lt;li&gt;Systems Development&lt;/li&gt;
-&lt;li&gt;Machine Learning Frameworks&lt;/li&gt;
-&lt;li&gt;Research Tools&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Graduate Research Assistant, UCI (2023-Present)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Digital Twin Systems for Disaster Resilience&lt;/li&gt;
+&lt;li&gt;Machine Learning Systems Optimization&lt;/li&gt;
+&lt;li&gt;Split Computing and Progressive Inference&lt;/li&gt;
+&lt;li&gt;Mentoring Zotbins Undergraduate Research Team&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;awards-and-honors&#34;&gt;Awards and Honors&lt;/h2&gt;
-&lt;p&gt;[Awards and honors to be added]&lt;/p&gt;</description>
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Graduate Research Assistant, CSUSM (2021-2023)&lt;/p&gt;</description>
     </item>
     <item>
       <title>Publications</title>
