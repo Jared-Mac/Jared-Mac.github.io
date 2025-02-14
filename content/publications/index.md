@@ -17,21 +17,3 @@ draft: false
    *Optical Architectures for Displays and Sensing in Augmented, Virtual, and Mixed Reality (AR, VR, MR) IV*  
    Vol. 12449. SPIE, 2023
 
-## Journal Articles
-
-[Your journal articles will be listed here]
-
-## Preprints
-
-[Your preprints will be listed here]
-
-## Presentations
-
-[Your conference presentations and talks will be listed here]
-
-## Thesis
-
-**Using Growing Self-organizing Maps to Construct Trail Networks Using Public GPS Data**  
-Master's Thesis, California State University San Marcos, 2022  
-*Developed novel learning algorithm to model hiking trail networks from raw GPS data using Growing Self-organizing Maps, Edge inference rules, and K-d trees*  
-[Download Thesis](/thesis.pdf) 
