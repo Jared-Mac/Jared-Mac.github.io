@@ -1,109 +1,25 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
-  <channel>
-    <title>Jared Macshane</title>
-    <link>http://localhost:1313/</link>
-    <description>Recent content on Jared Macshane</description>
-    <generator>Hugo -- 0.143.1</generator>
-    <language>en</language>
-    <lastBuildDate>Tue, 13 Feb 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>About</title>
-      <link>http://localhost:1313/about/</link>
-      <pubDate>Tue, 13 Feb 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/about/</guid>
-      <description>&lt;p&gt;I am a PhD student in the Department of Computer Science at the University of California, Irvine, advised by Professor Nalini Venkatasubramanian. My research focuses on Machine Learning Systems, Digital Twin technologies, and Distributed Systems optimization.&lt;/p&gt;
-&lt;h2 id=&#34;education&#34;&gt;Education&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;PhD in Computer Science, University of California, Irvine (2023-Present)&lt;/li&gt;
-&lt;li&gt;Master of Computer Science, California State University San Marcos (2020-2022)&lt;/li&gt;
-&lt;li&gt;Bachelor of Mathematics, University of California, Santa Barbara (2015-2017)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;research-interests&#34;&gt;Research Interests&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Machine Learning Systems&lt;/li&gt;
-&lt;li&gt;Digital Twin Technology&lt;/li&gt;
-&lt;li&gt;Distributed Systems&lt;/li&gt;
-&lt;li&gt;System Optimization&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;current-research&#34;&gt;Current Research&lt;/h2&gt;
-&lt;p&gt;I am currently working on:&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Curriculum Vitae</title>
-      <link>http://localhost:1313/cv/</link>
-      <pubDate>Tue, 13 Feb 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/cv/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;http://localhost:1313/cv.pdf&#34;&gt;Download PDF Version&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;education&#34;&gt;Education&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;PhD in Computer Science, University of California, Irvine (2023-Present)&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Advisor: Professor Nalini Venkatasubramanian&lt;/li&gt;
-&lt;li&gt;Research Focus: Machine Learning, Systems, Digital Twin&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Master of Computer Science, California State University San Marcos (2020-2022)&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Thesis: &amp;ldquo;Using Growing Self-organizing Maps to Construct Trail Networks Using Public GPS Data&amp;rdquo;&lt;/li&gt;
-&lt;li&gt;Best Paper Award at SIEDS 2023&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Bachelor of Mathematics, University of California, Santa Barbara (2015-2017)&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;research-experience&#34;&gt;Research Experience&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Graduate Research Assistant, UCI (2023-Present)&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Digital Twin Systems for Disaster Resilience&lt;/li&gt;
-&lt;li&gt;Machine Learning Systems Optimization&lt;/li&gt;
-&lt;li&gt;Split Computing and Progressive Inference&lt;/li&gt;
-&lt;li&gt;Mentoring Zotbins Undergraduate Research Team&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Graduate Research Assistant, CSUSM (2021-2023)&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Publications</title>
-      <link>http://localhost:1313/publications/</link>
-      <pubDate>Tue, 13 Feb 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/publications/</guid>
-      <description>&lt;h2 id=&#34;conference-papers&#34;&gt;Conference Papers&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;AI Assisted Trail Map Generation based on Public GPS Data&lt;/strong&gt;&lt;br&gt;
-Jared Macshane and Ali Ahmadinia&lt;br&gt;
-&lt;em&gt;2023 Systems and Information Engineering Design Symposium (SIEDS)&lt;/em&gt;&lt;br&gt;
-IEEE, 2023&lt;br&gt;
-&lt;em&gt;Best Paper Award&lt;/em&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Miniaturization and geometric optimization of SteamVR active optical trackers&lt;/strong&gt;&lt;br&gt;
-Sean Gow, et al.&lt;br&gt;
-&lt;em&gt;Optical Architectures for Displays and Sensing in Augmented, Virtual, and Mixed Reality (AR, VR, MR) IV&lt;/em&gt;&lt;br&gt;
-Vol. 12449. SPIE, 2023&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;</description>
-    </item>
-    <item>
-      <title>Research</title>
-      <link>http://localhost:1313/research/</link>
-      <pubDate>Tue, 13 Feb 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/research/</guid>
-      <description>&lt;h2 id=&#34;current-projects&#34;&gt;Current Projects&lt;/h2&gt;
-&lt;h3 id=&#34;digital-twin-systems-for-disaster-resilience&#34;&gt;Digital Twin Systems for Disaster Resilience&lt;/h3&gt;
-&lt;p&gt;Development and architecture of Digital Twin systems for real-world disaster resilience applications. This work focuses on creating robust and efficient systems that can model and respond to emergency situations.&lt;/p&gt;
-&lt;h3 id=&#34;split-computing-optimization&#34;&gt;Split Computing Optimization&lt;/h3&gt;
-&lt;p&gt;Research on reducing communication overhead in Split Computing environments, with a focus on implementing supervised compression techniques and developing progressive inference models for improved efficiency.&lt;/p&gt;
-&lt;h3 id=&#34;zotbins---smart-waste-management&#34;&gt;Zotbins - Smart Waste Management&lt;/h3&gt;
-&lt;p&gt;Leading a team of undergraduate researchers in developing distributed smart waste bins. The project aims to improve waste diversion rates through IoT implementation and data analytics.&lt;/p&gt;</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Hugo Academic CV Theme</title><link>https://example.com/</link><atom:link href="https://example.com/index.xml" rel="self" type="application/rss+xml"/><description>Hugo Academic CV Theme</description><generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Tue, 13 Feb 2024 00:00:00 +0000</lastBuildDate><image><url>https://example.com/media/icon_hu_645fa481986063ef.png</url><title>Hugo Academic CV Theme</title><link>https://example.com/</link></image><item><title>Projects</title><link>https://example.com/projects/</link><pubDate>Sun, 19 May 2024 00:00:00 +0000</pubDate><guid>https://example.com/projects/</guid><description/></item><item><title>Publications</title><link>https://example.com/publications/</link><pubDate>Sun, 18 Feb 2024 00:00:00 +0000</pubDate><guid>https://example.com/publications/</guid><description/></item><item><title>Developing scalable hands-on virtual and mixed-reality science labs</title><link>https://example.com/publication/journal-article/vr-labs/</link><pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate><guid>https://example.com/publication/journal-article/vr-labs/</guid><description/></item><item><title>SHIELD Digital Twin Project</title><link>https://example.com/project/shield/</link><pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate><guid>https://example.com/project/shield/</guid><description>&lt;p>The SHIELD Digital Twin project is developing a comprehensive framework for community-scale digital twins. Key aspects include:&lt;/p>
+&lt;ul>
+&lt;li>Distributed edge computing framework for efficient network utilization&lt;/li>
+&lt;li>Progressive inference models for resource-constrained environments&lt;/li>
+&lt;li>Cross-institutional collaboration and team coordination&lt;/li>
+&lt;li>Real-time data processing and visualization capabilities&lt;/li>
+&lt;/ul></description></item><item><title>SHIELD: A Distributed Edge Computing Framework for Community-Scale Digital Twins</title><link>https://example.com/publication/preprint/shield/</link><pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate><guid>https://example.com/publication/preprint/shield/</guid><description/></item><item><title>AI Assisted Trail Map Generation based on Public GPS Data</title><link>https://example.com/publication/conference-paper/trail-map/</link><pubDate>Sat, 01 Apr 2023 00:00:00 +0000</pubDate><guid>https://example.com/publication/conference-paper/trail-map/</guid><description/></item><item><title>Miniaturization and geometric optimization of SteamVR active optical trackers</title><link>https://example.com/publication/conference-paper/steamvr-tracker/</link><pubDate>Sun, 01 Jan 2023 00:00:00 +0000</pubDate><guid>https://example.com/publication/conference-paper/steamvr-tracker/</guid><description/></item><item><title>Wildfire Intelligence Projects</title><link>https://example.com/project/wildfire/</link><pubDate>Sun, 01 Jan 2023 00:00:00 +0000</pubDate><guid>https://example.com/project/wildfire/</guid><description>&lt;p>Research focusing on advanced wildfire detection and prediction systems:&lt;/p>
+&lt;ul>
+&lt;li>Generative model for wildfire spread prediction using Conditional Variational Autoencoders&lt;/li>
+&lt;li>Supervised compression system achieving 72.9% detection accuracy while reducing image size to 4.8KB&lt;/li>
+&lt;li>Edge computing framework for distributed wildfire detection using early-exit neural networks&lt;/li>
+&lt;li>Integration with existing wildfire monitoring infrastructure&lt;/li>
+&lt;/ul></description></item><item><title>Geospatial Machine Learning</title><link>https://example.com/project/trail-mapping/</link><pubDate>Sat, 01 Jan 2022 00:00:00 +0000</pubDate><guid>https://example.com/project/trail-mapping/</guid><description>&lt;p>Development of advanced geospatial data processing systems:&lt;/p>
+&lt;ul>
+&lt;li>Novel machine learning algorithm for processing large-scale geospatial data&lt;/li>
+&lt;li>Automated trail detection system for noisy GPS traces&lt;/li>
+&lt;li>Efficient data structures for improved computation performance&lt;/li>
+&lt;li>Integration with existing mapping platforms&lt;/li>
+&lt;/ul></description></item><item><title>Hands-On Virtual Reality Labs</title><link>https://example.com/project/vr-labs/</link><pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate><guid>https://example.com/project/vr-labs/</guid><description>&lt;p>Development of innovative virtual reality laboratory systems:&lt;/p>
+&lt;ul>
+&lt;li>Computer vision tracking system using Aruco markers for precise spatial tracking&lt;/li>
+&lt;li>User experience studies for system validation and improvement&lt;/li>
+&lt;li>Integration with educational curriculum&lt;/li>
+&lt;li>Development of interactive virtual laboratory exercises&lt;/li>
+&lt;/ul></description></item><item><title>Experience</title><link>https://example.com/experience/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://example.com/experience/</guid><description/></item></channel></rss>
