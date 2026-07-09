@@ -17,8 +17,8 @@ marketing:
     site_type: Person
     local_business_type: ''
     org_name: ''
-    description: ''
-    twitter: 'GetResearchDev'
+    description: 'Jared Macshane is a UC Irvine PhD student researching task-informed split computing, adaptive neural compression, progressive inference, and digital twins for disaster resilience.'
+    twitter: ''
   analytics:
     google_analytics: ''
     baidu_tongji: ''

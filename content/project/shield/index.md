@@ -1,6 +1,6 @@
 ---
 title: SHIELD Digital Twin Project
-summary: Leading development of a large-scale digital twin system for communities with distributed edge computing framework.
+summary: Community-scale digital twin platform for disaster resilience, edge sensing, simulation, and resource-aware inference.
 tags:
   - Edge Computing
   - Digital Twins
@@ -32,9 +32,9 @@ url_video: ""
 slides: ""
 ---
 
-The SHIELD Digital Twin project is developing a comprehensive framework for community-scale digital twins. Key aspects include:
+SHIELD is a community-scale digital twin project for disaster resilience. The system connects sensing, simulation, and edge intelligence so resource-constrained perception models can support operational decision-making.
 
-- Distributed edge computing framework for efficient network utilization
-- Progressive inference models for resource-constrained environments
-- Cross-institutional collaboration and team coordination
-- Real-time data processing and visualization capabilities 
+- Lead development of a large-scale digital twin platform for disaster resilience
+- Design progressive inference models for resource-constrained environments
+- Coordinate cross-functional work across multiple institutions
+- Build real-time data processing and visualization capabilities

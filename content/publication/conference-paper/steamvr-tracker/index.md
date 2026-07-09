@@ -3,14 +3,16 @@ title: "Miniaturization and geometric optimization of SteamVR active optical tra
 authors:
 - Sean Gow
 - admin
-- other authors
-date: "2023-01-01"
-doi: ""
+- Ali Ahmadinia
+- Kambiz Hamadani
+- Yuanyuan Jiang
+date: "2023-03-16"
+doi: "10.1117/12.2652267"
 
 publication_types: ["1"]
 
-publication: "Optical Architectures for Displays and Sensing in Augmented, Virtual, and Mixed Reality (AR, VR, MR) IV"
-publication_short: "SPIE AR/VR/MR"
+publication: "Optical Architectures for Displays and Sensing in Augmented, Virtual, and Mixed Reality IV, SPIE 12449"
+publication_short: "SPIE AR/VR/MR IV"
 
 abstract: This paper explores the optimization and miniaturization of SteamVR active optical tracking systems, focusing on geometric improvements for enhanced performance and reduced form factor.
 
@@ -22,7 +24,7 @@ tags:
 - Hardware Design
 featured: false
 
-url_pdf: ''
+url_pdf: 'https://par.nsf.gov/servlets/purl/10432264'
 url_code: ''
 url_dataset: ''
 url_poster: ''
@@ -32,4 +34,4 @@ url_source: ''
 url_video: ''
 
 projects: []
---- 
+---

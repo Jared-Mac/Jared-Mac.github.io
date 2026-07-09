@@ -1,6 +1,6 @@
 ---
-title: Hands-On Virtual Reality Labs
-summary: Development of computer vision tracking systems and virtual reality laboratories for education.
+title: Hands-On VR Labs
+summary: Computer-vision tracking systems and virtual/mixed-reality laboratories for scalable science education.
 tags:
   - Virtual Reality
   - Computer Vision
@@ -22,9 +22,9 @@ url_video: ""
 slides: ""
 ---
 
-Development of innovative virtual reality laboratory systems:
+This work supported scalable virtual and mixed-reality science labs by improving spatial tracking and validating the student experience.
 
-- Computer vision tracking system using Aruco markers for precise spatial tracking
-- User experience studies for system validation and improvement
-- Integration with educational curriculum
-- Development of interactive virtual laboratory exercises 
+- Developed a computer-vision tracking system using ArUco markers for precise spatial tracking
+- Tested custom active-tracking hardware and 3D-printed form factors
+- Led user-experience studies to validate system effectiveness and improve interaction design
+- Integrated tracking tools into interactive virtual laboratory exercises

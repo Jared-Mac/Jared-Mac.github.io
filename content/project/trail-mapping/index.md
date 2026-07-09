@@ -1,6 +1,6 @@
 ---
-title: Geospatial Machine Learning
-summary: Novel machine learning algorithms for processing large-scale geospatial data and automated trail detection.
+title: Geospatial Trail Mapping
+summary: Machine-learning system for converting noisy public GPS traces into trail-network maps.
 tags:
   - Machine Learning
   - Geospatial Data
@@ -22,9 +22,9 @@ url_video: ""
 slides: ""
 ---
 
-Development of advanced geospatial data processing systems:
+This project developed a machine-learning pipeline for large-scale geospatial data processing and automated trail detection from noisy GPS traces.
 
-- Novel machine learning algorithm for processing large-scale geospatial data
-- Automated trail detection system for noisy GPS traces
-- Efficient data structures for improved computation performance
-- Integration with existing mapping platforms 
+- Designed a trail-network construction algorithm using growing self-organizing maps
+- Processed noisy public GPS traces into cleaner map structure
+- Implemented efficient data structures to improve computation performance
+- Received the IEEE SIEDS Best Paper Award for the resulting publication
