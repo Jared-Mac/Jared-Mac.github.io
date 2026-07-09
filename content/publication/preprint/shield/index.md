@@ -1,5 +1,6 @@
 ---
 title: "SHIELD: A Distributed Edge Computing Framework for Community-Scale Digital Twins"
+draft: true
 authors:
 - admin
 - et al.
@@ -20,7 +21,7 @@ tags:
 - Digital Twins
 - Distributed Systems
 - Smart Communities
-featured: true
+featured: false
 
 url_pdf: ''
 url_code: ''
@@ -32,4 +33,4 @@ url_source: ''
 url_video: ''
 
 projects: []
---- 
+---

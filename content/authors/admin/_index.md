@@ -6,10 +6,6 @@ title: Jared Macshane
 first_name: Jared
 last_name: Macshane
 
-# Status emoji
-status:
-  icon: 🎓
-
 # Is this the primary user of the site?
 superuser: true
 
@@ -31,13 +27,16 @@ profiles:
     label: E-mail Me
   - icon: brands/github
     url: https://github.com/Jared-Mac
+  - icon: brands/linkedin
+    url: https://www.linkedin.com/in/jared-macshane-733971b9
 
 interests:
+  - Edge Computing
+  - Split Computing
+  - Neural Compression
+  - Progressive Inference
   - Digital Twins
   - Computer Vision
-  - Distributed Systems
-  - Machine Learning
-  - Edge Computing
 
 education:
   - area: PhD in Computer Science
@@ -51,7 +50,7 @@ education:
     date_start: 2020-01-01
     date_end: 2022-12-31
     summary: |
-      Thesis: Using Growing Self-organizing Maps to Construct Trail Networks Using Public GPS Data
+      Thesis: Constructing Trail Networks from Public GPS Data using Growing Self-Organizing Maps
   - area: Bachelor of Mathematics
     institution: University of California, Santa Barbara
     date_start: 2015-01-01
@@ -65,10 +64,18 @@ work:
     date_end: ''
     summary: |2-
       Research focuses on:
-      - Developing and architecting a Digital Twin for disaster resilience
-      - Reducing communication overhead in Split Computing
-      - Implementing supervised compression techniques
-      - Developing progressive inference models
+      - Distributed machine-learning systems for resource-constrained edge environments
+      - Task-informed neural compression for split computing
+      - Progressive inference for wildfire intelligence and disaster resilience
+      - Community-scale digital twins and edge visualization
+
+  - position: Research Engineer Intern
+    company_name: Fixstars Solutions Inc.
+    date_start: 2025-08-01
+    date_end: 2025-12-31
+    summary: |
+      - Implemented a ROS perception pipeline with real-time object-detection models and explainable AI techniques
+      - Performed statistical analysis of CAN bus waveform characteristics
 
   - position: Graduate Student Mentor
     company_name: Zotbins Undergraduate Research Project
@@ -78,19 +85,28 @@ work:
       - Leading team of undergraduate researchers developing IoT-enabled smart waste management system
       - Managing project lifecycle from design through iterative deployments
       - Developing ML-based classification system to improve campus waste diversion
+      - Mentoring IoT-SITY REU work on a Unity-based disaster-simulation platform
+
+  - position: Teaching Assistant
+    company_name: University of California, Irvine
+    date_start: 2023-01-01
+    date_end: ''
+    summary: |
+      - Hosted lab sections with one-on-one code guidance for ICS 32, ICS 33, and CSE 90
+      - Prepared and presented lecture materials for programming and systems-engineering courses
 
   - position: Machine Learning Consultant
     company_name: Ecorithms
-    date_start: 2022-01-01
-    date_end: 2022-12-31
+    date_start: 2022-05-01
+    date_end: 2022-09-30
     summary: |
       - Architected and deployed production-ready semantic segmentation models for aerial imagery
       - Optimized inference pipeline through model compression and deployment strategies
 
   - position: Research Fellow
     company_name: San Diego Zoo Wildlife Alliance - Conservation Lab
-    date_start: 2021-01-01
-    date_end: 2021-12-31
+    date_start: 2021-05-01
+    date_end: 2021-10-31
     summary: |
       - Developed and deployed real-time computer vision system for wildlife monitoring at scale
       - Engineered multi-threaded pipeline for processing high-volume image streams
@@ -111,10 +127,18 @@ skills:
         description: ''
         percent: 75
         icon: code-bracket
+      - name: JavaScript
+        description: ''
+        percent: 70
+        icon: code-bracket
   - name: Technologies
     items:
+      - name: Edge Computing
+        description: 'Split computing, progressive inference'
+        percent: 85
+        icon: server
       - name: Machine Learning
-        description: ''
+        description: 'Adaptive compression, detection'
         percent: 85
         icon: chart-bar
       - name: Computer Vision
@@ -157,8 +181,8 @@ awards:
 
 ## About Me
 
-I am a PhD student at UC Irvine working in the Distributed Systems Middleware Group. My research focuses on Digital Twins for disaster resilience and Split Computing, with an emphasis on reducing communication overhead through supervised compression techniques and progressive inference models.
+I am a PhD student at UC Irvine in the Distributed Systems Middleware Group. My research develops distributed machine-learning systems for resource-constrained edge and split-computing environments, with a focus on adaptive neural compression, progressive inference, and task-informed deployment.
 
-Previously, I developed VR tracking methods at CSU San Marcos and computer vision frameworks for wildlife conservation at the San Diego Zoo Wildlife Alliance. My master's thesis on AI-assisted trail map generation using GPS data received a Best Paper Award at IEEE SIEDS 2023.
+My current work centers on MANTIS, a task-informed neural compression system for UAV split inference, and SHIELD, a community-scale digital twin platform for disaster resilience. Across these projects, I work on systems that decide what evidence to send, when to process it locally, and how to preserve downstream task accuracy under limited connectivity.
 
-I am currently leading the development of SHIELD, a large-scale digital twin system for communities, while also mentoring undergraduate research teams in IoT and waste management projects.
+Previously, I developed VR tracking methods at CSU San Marcos and computer vision frameworks for wildlife conservation at the San Diego Zoo Wildlife Alliance. My master's thesis on AI-assisted trail map generation from GPS data received a Best Paper Award at IEEE SIEDS 2023.

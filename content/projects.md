@@ -9,10 +9,17 @@ design:
 
 # Page sections
 sections:
+  - block: markdown
+    content:
+      title: Projects
+      text: |-
+        Selected systems research across edge intelligence, environmental monitoring, disaster-resilience digital twins, and human-centered computing.
+    design:
+      css_class: page-intro section-readable
   - block: collection
     content:
-      title: Selected Projects
-      text: I enjoy making things. Here are a selection of projects that I have worked on over the years.
+      title: Selected work
+      text: Research projects spanning task-informed split computing, disaster-resilience digital twins, wildfire intelligence, geospatial machine learning, and virtual-reality labs.
       filters:
         folders:
           - project
@@ -20,4 +27,5 @@ sections:
       view: article-grid
       fill_image: false
       columns: 3
+      css_class: project-list
 ---

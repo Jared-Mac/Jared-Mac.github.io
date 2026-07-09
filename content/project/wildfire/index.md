@@ -1,6 +1,6 @@
 ---
-title: Wildfire Intelligence Projects
-summary: Development of machine learning models and edge computing systems for wildfire detection and prediction.
+title: Wildfire Intelligence
+summary: Machine learning, compression, and edge-computing systems for wildfire detection, prediction, and resource-aware monitoring.
 tags:
   - Machine Learning
   - Edge Computing
@@ -22,9 +22,9 @@ url_video: ""
 slides: ""
 ---
 
-Research focusing on advanced wildfire detection and prediction systems:
+Wildfire intelligence work connects perception models with constrained deployment settings where compute, bandwidth, and response time matter.
 
-- Generative model for wildfire spread prediction using Conditional Variational Autoencoders
-- Supervised compression system achieving 72.9% detection accuracy while reducing image size to 4.8KB
-- Edge computing framework for distributed wildfire detection using early-exit neural networks
-- Integration with existing wildfire monitoring infrastructure 
+- Developed a generative wildfire-spread model using conditional variational autoencoders
+- Designed supervised image-compression models that reduced inputs to 4.8 KB while preserving 72.9% wildfire-detection accuracy
+- Built an edge-computing framework for distributed wildfire detection using early-exit neural networks
+- Integrated wildfire perception work with broader digital twin and disaster-resilience systems
