@@ -4,6 +4,6 @@ interface Props { entry: Entry; }
 const { entry } = Astro.props;
 ---
 <article class="publication-row" data-publication data-search={`${entry.title} ${entry.summary} ${authors(entry)} ${entry.tags.join(' ')} ${entry.publication_short}`.toLowerCase()} data-year={entry.year}>
-  <div class="publication-year"><span>{entry.year}</span>{entry.publication === 'Under Review' && <span class="review-label">Under review</span>}</div>
-  <div class="publication-main"><div class="eyebrow publication-venue" set:html={markdown(entry.publication_short ?? '')} /><h3><a href={entry.path}>{entry.title}</a></h3><p class="publication-authors">{authors(entry)}</p><div class="publication-links"><a href={entry.path}>Details ↗</a>{entry.url_pdf && <a href={entry.url_pdf}>Paper ↗</a>}{entry.doi && <a href={`https://doi.org/${entry.doi}`}>DOI ↗</a>}{entry.url_project && <a href={entry.url_project}>Project ↗</a>}</div></div>
+  <div class="publication-year">{entry.year}</div>
+  <div class="publication-main"><h3><a href={entry.path}>{entry.title}</a></h3><p class="publication-authors">{authors(entry)}</p><div class="publication-venue" set:html={markdown(entry.publication ?? '')} /><div class="publication-links">{entry.url_pdf && <a href={entry.url_pdf}>PDF</a>}{entry.doi && <a href={`https://doi.org/${entry.doi}`}>DOI</a>}{entry.url_project && <a href={entry.url_project}>Project</a>}</div></div>
 </article>

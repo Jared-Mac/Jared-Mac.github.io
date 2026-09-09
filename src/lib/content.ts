@@ -37,9 +37,6 @@ export const tags = [...new Set([...projects, ...publications].flatMap(entry => 
 export const profile = matter(readFileSync(join(process.cwd(), 'content/authors/admin/_index.md'), 'utf8'));
 export const experience = matter(readFileSync(join(process.cwd(), 'content/experience.md'), 'utf8')).data;
 export const authors = (entry: Entry) => entry.authors?.map(name => name === 'admin' ? 'Jared Macshane' : name).join(', ') ?? '';
-export const shortTitle: Record<string, string> = {
-  mantis: 'MANTIS', shield: 'SHIELD', wildfire: 'Wildfire intelligence', 'trail-mapping': 'Mapping the unmarked', 'vr-labs': 'Hands-on, virtually',
-};
 export const projectKicker: Record<string, string> = {
   mantis: 'Task-informed neural compression', shield: 'Community-scale digital twins', wildfire: 'Resource-aware environmental sensing', 'trail-mapping': 'Geospatial machine learning', 'vr-labs': 'Immersive science education',
 };

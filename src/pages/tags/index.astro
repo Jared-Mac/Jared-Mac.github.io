@@ -3,5 +3,5 @@ import Base from '../../layouts/Base.astro';
 import { tags, slugify, projects, publications } from '../../lib/content';
 ---
 <Base title="Research topics — Jared Macshane" description="Explore Jared Macshane’s research by topic, from edge computing and neural compression to computer vision and digital twins.">
-  <div class="wrap"><header class="page-intro"><p class="eyebrow">Research / Index</p><h1>Follow your<br /><em>curiosity.</em></h1><p>Browse projects and publications by research topic.</p></header><div class="topic-index">{tags.map(tag => <a href={`/tags/${slugify(tag)}/`}><span>{tag}</span><span>{[...projects, ...publications].filter(p => p.tags.includes(tag)).length} ↗</span></a>)}</div></div>
+  <div class="wrap"><header class="page-intro"><h1>Research topics</h1><p>Projects and publications by topic.</p></header><div class="topic-index">{tags.map(tag => <a href={`/tags/${slugify(tag)}/`}><span>{tag}</span><span>{[...projects, ...publications].filter(p => p.tags.includes(tag)).length}</span></a>)}</div></div>
 </Base>

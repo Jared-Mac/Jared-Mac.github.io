@@ -5,8 +5,7 @@ import { projects } from '../lib/content';
 ---
 <Base title="Research & projects — Jared Macshane" description="Research in task-informed compression, edge intelligence, disaster-resilience digital twins, geospatial machine learning, and immersive science labs.">
   <div class="wrap">
-    <header class="page-intro"><p class="eyebrow">Research / Selected systems & applied work</p><h1>Built for the<br /><em>world outside.</em></h1><p>From the data we transmit to the decisions we make. I study how intelligent systems can do more with the resources they have.</p></header>
-    <div class="agenda"><div><span class="eyebrow">01 / Edge intelligence</span><h2>Make every bit count.</h2><p>Task-informed compression and progressive inference for constrained sensing platforms.</p></div><div><span class="eyebrow">02 / Disaster resilience</span><h2>Connect sensing to action.</h2><p>Digital twins that link perception, simulation, and community-scale decision support.</p></div><div><span class="eyebrow">03 / Applied vision</span><h2>Take models into the field.</h2><p>Practical systems for environmental monitoring, geospatial data, and immersive learning.</p></div></div>
-    <section class="section"><div class="section-heading"><h2>Selected <em>projects.</em></h2><span class="eyebrow">{projects.length} projects</span></div><div class="project-grid">{projects.map((project, index) => <ProjectCard project={project} index={index} />)}</div></section>
+    <header class="page-intro"><h1>Research</h1><p>My research focuses on distributed machine learning under constraints on bandwidth, computation, and latency. These projects span neural compression, environmental sensing, digital twins, and applied computer vision.</p></header>
+    <section class="section" aria-label="Research projects"><div class="project-grid">{projects.map(project => <ProjectCard project={project} />)}</div></section>
   </div>
 </Base>

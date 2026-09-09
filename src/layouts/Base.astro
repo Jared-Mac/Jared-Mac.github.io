@@ -1,11 +1,8 @@
 ---
-import '@fontsource-variable/manrope';
-import '@fontsource/instrument-serif/latin-400.css';
-import '@fontsource/instrument-serif/latin-400-italic.css';
 import '../styles/global.css';
 interface Props { title?: string; description?: string; image?: string | null; canonicalPath?: string; noindex?: boolean; }
 const {
-  title = 'Jared Macshane — Systems × machine learning',
+  title = 'Jared Macshane — Computer Science, UC Irvine',
   description = 'Jared Macshane is a UC Irvine PhD student researching neural compression, split computing, and digital twins for disaster resilience.',
   image = '/images/jared.jpg',
   canonicalPath = Astro.url.pathname,
@@ -13,7 +10,7 @@ const {
 } = Astro.props;
 const canonical = new URL(canonicalPath, Astro.site);
 const socialImage = image ? new URL(image, Astro.site) : null;
-const links = [['Research', '/projects/'], ['Publications', '/publications/'], ['About', '/experience/']];
+const links = [['Research', '/projects/'], ['Publications', '/publications/'], ['Experience', '/experience/']];
 ---
 <!doctype html>
 <html lang="en">
@@ -26,7 +23,7 @@ const links = [['Research', '/projects/'], ['Publications', '/publications/'], [
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.png" type="image/png" />
     <link rel="alternate" type="application/rss+xml" title="Jared Macshane — Research" href="/index.xml" />
-    <meta name="theme-color" content="#f4f3ed" />
+    <meta name="theme-color" content="#ffffff" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Jared Macshane" />
     <meta property="og:title" content={title} />
@@ -41,18 +38,13 @@ const links = [['Research', '/projects/'], ['Publications', '/publications/'], [
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header wrap">
-      <a class="wordmark" href="/" aria-label="Jared Macshane, home"><span class="monogram" aria-hidden="true">jm.</span><span>Jared Macshane</span></a>
+      <a class="wordmark" href="/" aria-label="Jared Macshane, home">Jared Macshane</a>
       <nav aria-label="Main navigation">
         {links.map(([label, href]) => <a href={href} aria-current={canonicalPath.startsWith(href) || (href === '/projects/' && canonicalPath.startsWith('/project/')) || (href === '/publications/' && canonicalPath.startsWith('/publication/')) ? 'page' : undefined}>{label}</a>)}
-        <a class="nav-cv" href="/uploads/resume.pdf">CV <span aria-hidden="true">↗</span></a>
+        <a href="/uploads/resume.pdf">CV</a>
       </nav>
     </header>
     <main id="main"><slot /></main>
-    <footer class="site-footer">
-      <div class="wrap">
-        <div class="footer-top"><div><p class="eyebrow">Good ideas start with a conversation</p><h2>Let’s connect<span class="accent">.</span></h2></div><a class="round-link" href="mailto:jmacshan@uci.edu" aria-label="Email Jared Macshane">↗</a></div>
-        <div class="footer-bottom"><a href="mailto:jmacshan@uci.edu">jmacshan@uci.edu</a><div class="social-links"><a href="https://github.com/Jared-Mac">GitHub ↗</a><a href="https://www.linkedin.com/in/jared-macshane-733971b9">LinkedIn ↗</a><a href="/uploads/resume.pdf">CV ↗</a></div><span>© {new Date().getFullYear()} Jared Macshane</span></div>
-      </div>
-    </footer>
+    <footer class="site-footer wrap"><span>© {new Date().getFullYear()} Jared Macshane</span><a href="mailto:jmacshan@uci.edu">jmacshan@uci.edu</a></footer>
   </body>
 </html>

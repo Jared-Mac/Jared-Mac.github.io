@@ -1,11 +1,9 @@
 ---
-import { shortTitle, projectKicker, type Entry } from '../lib/content';
+import type { Entry } from '../lib/content';
 interface Props { project: Entry; index?: number; }
-const { project, index = 0 } = Astro.props;
+const { project } = Astro.props;
 ---
-<a class:list={['project-card', `project-${project.slug}`]} href={project.path}>
-  <div class="project-card-top"><span class="eyebrow">{String(index + 1).padStart(2, '0')} / {project.tags[0]}</span><span class="card-arrow" aria-hidden="true">↗</span></div>
-  <div class="project-card-title"><p class="eyebrow">{projectKicker[project.slug]}</p><h3>{shortTitle[project.slug] ?? project.title}</h3></div>
+<article class="project-card">
+  <h3><a href={project.path}>{project.title}</a></h3>
   <p>{project.summary}</p>
-  <div class="project-card-bottom"><span>{project.tags.slice(1, 3).join(' / ')}</span><span>{project.year}</span></div>
-</a>
+</article>
