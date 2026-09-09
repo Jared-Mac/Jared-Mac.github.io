@@ -1,52 +1,49 @@
-# [Hugo Academic CV Theme](https://github.com/HugoBlox/theme-academic-cv)
+# Jared Macshane
 
-[![Screenshot](.github/preview.webp)](https://hugoblox.com/templates/)
+Personal research portfolio built with Astro, TypeScript, and custom CSS.
+Published at **https://jaredmacshane.com/** through GitHub Pages.
 
-The Hugo **Academic CV Template** empowers you to easily create your job-winning online resumé, showcase your academic publications, and create online courses or knowledge bases to grow your audience.
+## Development
 
-[![Get Started](https://img.shields.io/badge/-Get%20started-ff4655?style=for-the-badge)](https://hugoblox.com/templates/)
-[![Discord](https://img.shields.io/discord/722225264733716590?style=for-the-badge)](https://discord.com/channels/722225264733716590/742892432458252370/742895548159492138)  
-[![Twitter Follow](https://img.shields.io/twitter/follow/GetResearchDev?label=Follow%20on%20Twitter)](https://twitter.com/GetResearchDev)
+Use Node.js 24 LTS and npm.
 
-️**Trusted by 250,000+ researchers, educators, and students.** Highly customizable via the integrated **no-code, Hugo Blox Builder**, making every site truly personalized ⭐⭐⭐⭐⭐
+```sh
+npm ci
+npm run dev
+```
 
-Easily write technical content with plain text Markdown, LaTeX math, diagrams, RMarkdown, or Jupyter, and import publications from BibTeX.
+Astro prints the local preview URL. Run `npm run build` to check types, generate
+the static site, and validate content migration, local links, metadata, and feeds.
+Run `npm run preview` to serve the production build.
 
-[Check out the latest demo](https://academic-demo.netlify.app/) of what you'll get in less than 10 minutes, or [get inspired by our academics and research groups](https://hugoblox.com/creators/).
+## Content
 
-The integrated [**Hugo Blox Builder**](https://hugoblox.com) and CMS makes it easy to create a beautiful website for free. Edit your site in the CMS (or your favorite editor), generate it with [Hugo](https://github.com/gohugoio/hugo), and deploy with GitHub or Netlify. Customize anything on your site with widgets, light/dark themes, and language packs.
+- `content/project/*/index.md`: project descriptions and metadata.
+- `content/publication/*/*/index.md`: publications, authors, abstracts, DOI and paper links.
+- `content/authors/admin/_index.md`: biography, education, awards, and profile information.
+- `content/experience.md`: research and industry experience.
+- `static/uploads/resume.pdf`: downloadable CV.
+- `static/uploads/mantis/`: original research figures.
+- `src/pages/index.astro`: homepage introduction and featured research.
+- `src/styles/global.css`: design system and responsive layouts.
 
-- 👉 [**Get Started**](https://hugoblox.com/templates/)
-- 📚 [View the **documentation**](https://docs.hugoblox.com/)
-- 💬 [Chat with the **Hugo Blox Builder community**](https://discord.gg/z8wNYzb) or [**Hugo community**](https://discourse.gohugo.io)
-- 🐦 Twitter: [@GetResearchDev](https://twitter.com/GetResearchDev) [@GeorgeCushen](https://twitter.com/GeorgeCushen) [#MadeWithHugoBlox](https://twitter.com/search?q=%23MadeWithHugoBlox&src=typed_query)
-- ⬇️ **Automatically import your publications from BibTeX** with the [Hugo Academic CLI](https://github.com/GetRD/academic-file-converter)
-- 💡 [Suggest an improvement](https://github.com/HugoBlox/hugo-blox-builder/issues)
-- ⬆️ **Updating?** View the [Update Guide](https://docs.hugoblox.com/reference/update/) and [Release Notes](https://github.com/HugoBlox/hugo-blox-builder/releases)
+Existing Markdown front matter is supported directly; no content conversion is
+needed. Entries marked `draft: true` are excluded. The name `admin` in publication
+author lists renders as Jared Macshane. Search and year filters run in the browser;
+all content and navigation are available without JavaScript.
 
-## We ask you, humbly, to support this open source movement
+## Publishing
 
-Today we ask you to defend the open source independence of the Hugo Blox Builder and themes 🐧
+Pushing to `main` runs `.github/workflows/deploy.yml`, which checks and builds the
+site, then uploads `dist/` to GitHub Pages. Pull requests run the same validation
+without deploying. Generated output and dependencies are not committed.
 
-We're an open source movement that depends on your support to stay online and thriving, but 99.9% of our creators don't give; they simply look the other way.
+In repository Settings → Pages, use **GitHub Actions** as the source and
+`jaredmacshane.com` as the custom domain. Enable **Enforce HTTPS** once GitHub has
+issued its certificate. The canonical origin is defined in `astro.config.mjs`
+and `src/lib/content.ts`; `static/CNAME` preserves the custom domain.
 
-### [❤️ Click here to become a Sponsor, unlocking awesome perks such as _exclusive academic templates and blocks_](https://hugoblox.com/sponsor/)
-
-<!--
-<p align="center"><a href="https://hugoblox.com/templates/" target="_blank" rel="noopener"><img src="https://hugoblox.com/uploads/readmes/academic_logo_200px.png" alt="Hugo Academic Theme for Hugo Blox Builder"></a></p>
--->
-
-## Demo image credits
-
-- [Unsplash](https://unsplash.com)
-
-## Latest news
-
-<!--START_SECTION:news-->
-
-- [Easily make an academic CV website to get more cites and grow your audience 🚀](https://hugoblox.com/blog/easily-make-academic-website/)
-- [What&#39;s new in v5.2?](https://hugoblox.com/blog/whats-new-in-v5.2/)
-- [What&#39;s new in v5.1?](https://hugoblox.com/blog/whats-new-in-v5.1/)
-- [Version 5.0 (February 2021)](https://hugoblox.com/blog/version-5.0-february-2021/)
-- [Version 5.0 Beta 3 (February 2021)](https://hugoblox.com/blog/version-5.0-beta-3-february-2021/)
-<!--END_SECTION:news-->
+Original project/publication URLs, topic pages, RSS URLs, CV downloads, and
+the author-page redirect are preserved. Sitemap and social metadata are generated
+at build time. Legacy Hugo-generated output and build configuration have been removed;
+the previous site remains available in Git history.

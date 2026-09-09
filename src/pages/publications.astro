@@ -1,0 +1,34 @@
+---
+import Base from '../layouts/Base.astro';
+import PublicationRow from '../components/PublicationRow.astro';
+import { publications } from '../lib/content';
+const years = [...new Set(publications.map(p => p.year))];
+---
+<Base title="Publications — Jared Macshane" description="Peer-reviewed papers and current manuscripts by Jared Macshane on neural compression, progressive inference, trail mapping, and virtual reality.">
+  <div class="wrap">
+    <header class="page-intro"><p class="eyebrow">Publications / Papers & manuscripts</p><h1>Research,<br /><em>on the record.</em></h1><p>Peer-reviewed work and current manuscripts across distributed intelligence, geospatial machine learning, and immersive systems.</p></header>
+    <section class="publication-archive" aria-label="Publication archive">
+      <div class="publication-tools"><label class="search-field"><span class="eyebrow">Find a paper</span><input id="paper-search" type="search" placeholder="Search title, topic, or author…" autocomplete="off" /></label><label class="year-field"><span class="eyebrow">Year</span><select id="paper-year"><option value="all">All years</option>{years.map(year => <option value={year}>{year}</option>)}</select></label><p id="paper-count" role="status" aria-live="polite">{publications.length} publications</p></div>
+      <div>{publications.map(entry => <PublicationRow entry={entry} />)}</div>
+      <p id="paper-empty" class="empty-state" hidden>No papers match this search. Try another topic or choose all years.</p>
+      <noscript><p class="archive-note">All publications are listed above. Enable JavaScript to search and filter them.</p></noscript>
+    </section>
+  </div>
+</Base>
+<script>
+  const search = document.querySelector<HTMLInputElement>('#paper-search')!;
+  const year = document.querySelector<HTMLSelectElement>('#paper-year')!;
+  const rows = [...document.querySelectorAll<HTMLElement>('[data-publication]')];
+  function filter() {
+    const terms = search.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
+    let count = 0;
+    rows.forEach(row => {
+      row.hidden = !(terms.every(term => row.dataset.search?.includes(term)) && (year.value === 'all' || row.dataset.year === year.value));
+      if (!row.hidden) count++;
+    });
+    document.querySelector('#paper-count')!.textContent = `${count} publication${count === 1 ? '' : 's'}`;
+    document.querySelector<HTMLElement>('#paper-empty')!.hidden = count !== 0;
+  }
+  search.addEventListener('input', filter);
+  year.addEventListener('change', filter);
+</script>

@@ -1,3 +1,0 @@
-User-agent: *
-
-Sitemap: https://jaredmacshane.com/sitemap.xml

@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+import { profile, experience, markdown } from '../lib/content';
+interface Work { title: string; company: string; date_start: string; date_end?: string; description: string; }
+interface Education { area: string; institution: string; date_start: string; date_end?: string; summary?: string; }
+interface Award { title: string; awarder: string; date: string; summary: string; }
+const work = experience.sections.find((s: { block: string }) => s.block === 'resume-experience').content.items as Work[];
+const education = profile.data.education as Education[];
+const awards = profile.data.awards as Award[];
+const year = (value: string | Date) => new Date(value).getUTCFullYear().toString();
+---
+<Base title="About & experience — Jared Macshane" description="Meet Jared Macshane, a computer science PhD researcher at UC Irvine working across distributed systems, machine learning, and environmental resilience.">
+  <div class="wrap">
+    <header class="page-intro"><p class="eyebrow">About / Research, practice & people</p><h1>A systems thinker.<br /><em>A builder at heart.</em></h1></header>
+    <section class="biography"><img src="/images/jared.jpg" width="960" height="720" alt="Jared Macshane in Japan" /><div class="prose" set:html={markdown(profile.content.replace(/^\s*## About Me\s*/, ''))} /></section>
+    <section class="section resume-section"><div class="resume-heading"><p class="eyebrow">01 / Research & industry</p><h2>Where I’ve<br /><em>put it to work.</em></h2><a class="text-link" href="/uploads/resume.pdf">Download full CV ↗</a></div><div>{work.map(item => <article class="timeline-item"><p class="eyebrow">{year(item.date_start)} — {item.date_end ? year(item.date_end) : 'Present'}</p><h3>{item.title}</h3><p class="organization">{item.company}</p><div class="prose" set:html={markdown(item.description)} /></article>)}</div></section>
+    <section class="section resume-section"><div class="resume-heading"><p class="eyebrow">02 / Education</p><h2>The<br /><em>foundations.</em></h2></div><div>{education.map(item => <article class="timeline-item"><p class="eyebrow">{year(item.date_start)} — {item.date_end ? year(item.date_end) : 'Present'}</p><h3>{item.area}</h3><p class="organization">{item.institution}</p>{item.summary && <p>{item.summary}</p>}</article>)}</div></section>
+    <section class="section"><div class="section-heading"><div><p class="eyebrow">03 / Recognition</p><h2>A few <em>milestones.</em></h2></div></div><div class="awards-grid">{awards.map(award => <article><span class="eyebrow">{year(award.date)} / {award.awarder}</span><h3>{award.title}</h3><p>{award.summary}</p></article>)}</div></section>
+  </div>
+</Base>

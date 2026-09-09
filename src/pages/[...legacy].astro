@@ -1,0 +1,16 @@
+---
+import { tags, slugify } from '../lib/content';
+export function getStaticPaths() {
+  const redirects = [
+    ['project', '/projects/'], ['publication', '/publications/'], ['authors', '/experience/'],
+    ['author/jared-macshane', '/experience/'], ['author/admin', '/experience/'],
+    ['project/page/1', '/projects/'], ['publication/page/1', '/publications/'],
+    ['publication_types', '/publications/'],
+    ...['1', '2', '3'].flatMap(type => [[`publication_types/${type}`, '/publications/'], [`publication_types/${type}/page/1`, '/publications/']]),
+    ...tags.map(tag => [`tags/${slugify(tag)}/page/1`, `/tags/${slugify(tag)}/`]),
+  ];
+  return redirects.map(([legacy, destination]) => ({ params: { legacy }, props: { destination } }));
+}
+const { destination } = Astro.props;
+---
+<!doctype html><html lang="en"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>Page moved — Jared Macshane</title><meta http-equiv="refresh" content={`0;url=${destination}`} /><link rel="canonical" href={new URL(destination, Astro.site)} /><meta name="robots" content="noindex" /></head><body><p>This page has moved. <a href={destination}>Continue to Jared Macshane’s website.</a></p></body></html>

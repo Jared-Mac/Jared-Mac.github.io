@@ -1,0 +1,35 @@
+---
+import Base from '../layouts/Base.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import PublicationRow from '../components/PublicationRow.astro';
+import { projects, publications } from '../lib/content';
+---
+<Base>
+  <section class="hero wrap">
+    <div class="hero-copy">
+      <p class="eyebrow"><span class="status-dot"></span> PhD researcher · UC Irvine</p>
+      <h1>Intelligence,<br />where it <em>matters.</em></h1>
+      <p class="hero-intro">I’m Jared. I build machine-learning systems for a world with limited bandwidth, finite compute, and no time to waste.</p>
+      <div class="hero-actions"><a class="button" href="#selected-work">Explore my research <span aria-hidden="true">↘</span></a><a class="text-link" href="/experience/">A little about me <span aria-hidden="true">↗</span></a></div>
+      <div class="hero-topics"><span>Edge intelligence</span><span>Neural compression</span><span>Digital twins</span></div>
+    </div>
+    <figure class="portrait-panel"><img src="/images/jared.jpg" alt="Jared Macshane" width="960" height="720" fetchpriority="high" /><figcaption><span class="eyebrow">From models to the field</span><span>Systems × machine learning</span></figcaption><span class="portrait-coordinate">BASED AT UC IRVINE</span></figure>
+  </section>
+  <section class="research-note wrap"><span class="eyebrow">The question behind my work</span><p>How do we make intelligent systems useful <em>when resources are scarce?</em></p><a class="text-link" href="/projects/">Research agenda ↗</a></section>
+  <section id="selected-work" class="section wrap">
+    <div class="section-heading"><div><p class="eyebrow">01 / Selected research</p><h2>Less data.<br /><em>More possibility.</em></h2></div><a class="text-link" href="/projects/">All projects <span aria-hidden="true">↗</span></a></div>
+    <a class="feature-project" href="/project/mantis/">
+      <div class="feature-copy"><span class="pill">Current work · Under review</span><h3>MANTIS</h3><p class="feature-subtitle">Send what matters.<br />Keep the intelligence.</p><p>Task-informed neural compression for UAV perception. Compact representations shaped around the task, before they cross the network.</p><div class="feature-stat"><strong>62.2<span>%</span></strong><span>bitrate reduction (up to)<br />at matched task accuracy</span></div><span class="feature-link">Inside the project <span aria-hidden="true">↗</span></span></div>
+      <div class="feature-art"><div class="figure-label"><span>01 — SYSTEM ARCHITECTURE</span><span>CLIENT → EDGE</span></div><img src="/uploads/mantis/architecture.png" alt="MANTIS architecture: task specification, training, and client-to-edge split deployment" loading="lazy" width="1240" height="690" /><span class="figure-footnote">Task-informed compression / UAV perception</span></div>
+    </a>
+    <div class="project-grid home-project-grid">{projects.filter(p => ['shield', 'wildfire'].includes(p.slug)).map((project, index) => <ProjectCard project={project} index={index + 1} />)}</div>
+  </section>
+  <section class="publication-section section wrap">
+    <div class="section-heading"><div><p class="eyebrow">02 / Papers & manuscripts</p><h2>Ideas, <em>in print.</em></h2></div><a class="text-link" href="/publications/">All publications ↗</a></div>
+    <div>{publications.filter(p => p.featured).slice(0, 3).map(entry => <PublicationRow entry={entry} />)}</div>
+  </section>
+  <section class="about-teaser wrap section">
+    <div><p class="eyebrow">03 / The person behind the work</p><h2>Curiosity,<br /><em>put to work.</em></h2></div>
+    <div><p>I’m a computer science PhD student in the Distributed Systems Middleware Group at UC Irvine. My work connects machine learning with the practical constraints of real deployments.</p><p>That curiosity has taken me from wildlife monitoring at the San Diego Zoo Wildlife Alliance to virtual science labs, trail mapping, and systems for disaster resilience.</p><a class="text-link" href="/experience/">More about my path ↗</a></div>
+  </section>
+</Base>

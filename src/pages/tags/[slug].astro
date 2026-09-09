@@ -1,0 +1,13 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import PublicationRow from '../../components/PublicationRow.astro';
+import { tags, slugify, projects, publications } from '../../lib/content';
+export function getStaticPaths() { return tags.map(tag => ({ params: { slug: slugify(tag) }, props: { tag } })); }
+const { tag } = Astro.props;
+const matchingProjects = projects.filter(p => p.tags.includes(tag));
+const matchingPapers = publications.filter(p => p.tags.includes(tag));
+---
+<Base title={`${tag} — Jared Macshane`} description={`Projects and publications by Jared Macshane on ${tag.toLowerCase()}.`}>
+  <div class="wrap"><header class="page-intro"><a class="back-link" href="/tags/">← All topics</a><p class="eyebrow">Research topic</p><h1>{tag}</h1></header>{matchingProjects.length > 0 && <section class="section"><div class="section-heading"><h2>Projects</h2></div><div class="project-grid">{matchingProjects.map((project, index) => <ProjectCard project={project} index={index} />)}</div></section>}{matchingPapers.length > 0 && <section class="section"><div class="section-heading"><h2>Publications</h2></div>{matchingPapers.map(entry => <PublicationRow entry={entry} />)}</section>}</div>
+</Base>
