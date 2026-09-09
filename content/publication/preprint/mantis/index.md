@@ -6,14 +6,15 @@ authors:
 date: "2026-01-01"
 doi: ""
 
-publication_types: ["3"]
+publication_types: ["1"]
 
-publication: "Under Review"
-publication_short: "Under Review"
+publication: "SEC (forthcoming)"
+publication_short: "SEC (forthcoming)"
+publication_status: forthcoming
 
 abstract: "MANTIS is a task-informed split-computing system for neural compression. A lightweight client-side task detector estimates task relevance, a conditional analysis transform injects that signal through Conditional Generalized Divisive Normalization, and task-specific entropy bottlenecks and edge heads decode compact task-shaped latents for UAV perception workloads."
 
-summary: "Task-informed neural compression for UAV split inference across urban segmentation, wildlife detection, and wildfire monitoring."
+summary: "Task-informed neural compression for UAV split inference across urban segmentation, wildlife detection, and wildfire monitoring. Forthcoming at SEC."
 
 tags:
 - Edge Computing

@@ -6,7 +6,7 @@ export function getStaticPaths() {
     { params: { feed: 'project/index' }, props: { entries: projects } },
     { params: { feed: 'publication/index' }, props: { entries: publications } },
     { params: { feed: 'publication_types/index' }, props: { entries: publications } },
-    ...['conference-paper', 'journal-article', 'preprint'].map((type, index) => ({ params: { feed: `publication_types/${index + 1}/index` }, props: { entries: publications.filter(p => p.slug.startsWith(type + '/')) } })),
+    ...['1', '2', '3'].map(type => ({ params: { feed: `publication_types/${type}/index` }, props: { entries: publications.filter(p => p.publication_types?.includes(type)) } })),
     { params: { feed: 'tags/index' }, props: { entries: all } },
     ...tags.map(tag => ({ params: { feed: `tags/${slugify(tag)}/index` }, props: { entries: all.filter(p => p.tags.includes(tag)) } })),
   ];

@@ -8,6 +8,7 @@ export interface Entry {
   tags: string[]; date: string; year: string; draft?: boolean; featured?: boolean;
   abstract?: string; authors?: string[]; doi?: string; publication?: string;
   publication_short?: string; url_pdf?: string; url_code?: string; url_project?: string;
+  publication_status?: string; publication_types?: string[];
 }
 export const site = 'https://jaredmacshane.com';
 export const slugify = (text: string) => text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
