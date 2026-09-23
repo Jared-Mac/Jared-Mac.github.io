@@ -12,10 +12,10 @@ const design = designOf(project);
 // Give the original measured figures their own readable, full-width plates below the text.
 const body = project.slug === 'mantis' ? project.body.replace(/!\[[^\]]*\]\([^)]*\)/g, '') : project.body;
 const results = [
-  { file: 'architecture.png', title: 'The MANTIS architecture', caption: 'The original system diagram: task estimation, conditional encoding, and inference at the edge.' },
-  { file: 'e2e-latency.png', title: 'From capture to inference', caption: 'End-to-end latency across the evaluated task workloads.' },
-  { file: 'channel-usage-bpp.png', title: 'Where the bits go', caption: 'Mean bitrate contributed by each of the 48 latent channels for urban segmentation (UAVid), wildlife detection (WAID), and smoke detection (Boreal Fire).' },
-  { file: 'a10-fp16-baselines.png', title: 'Measuring the tradeoff', caption: 'Baseline comparisons on A10 hardware with FP16 precision.' },
+  { file: 'architecture.png', title: 'System architecture', caption: 'System architecture as published: task specification and the two-stage training procedure, the client and server deployment packages, and the runtime path from input frame to task heads.' },
+  { file: 'channel-usage-bpp.png', title: 'Latent channel usage', caption: 'Bitrate contribution per latent channel for each task. Under task conditioning (MANTIS-TC), bitrate concentrates around channels 27 and 29, with lighter task-specific secondary channels; the non-conditioned ablation (MANTIS-TA) relies on a different, broader set of channels.' },
+  { file: 'e2e-latency.png', title: 'End-to-end latency', caption: 'End-to-end latency versus effective uplink data rate, including client execution or codec encoding, decoding, uplink serialization, and server inference. Kilobit-scale task-conditioned latents approach the compute floor in communication-bound regimes, where image offload is dominated by transmission.' },
+  { file: 'a10-fp16-baselines.png', title: 'Server-side latency', caption: 'Mean server-side latency on an NVIDIA A10 (FP16, batch size 1, 512 × 512 input): the MANTIS decoder and head compared with full-offload baselines. The MANTIS server path is faster for UAVid and Boreal Fire and slower for WAID.' },
 ];
 ---
 <Base title={`${project.title} — Jared Macshane`} description={project.summary} image={projectImage(project.slug)}>

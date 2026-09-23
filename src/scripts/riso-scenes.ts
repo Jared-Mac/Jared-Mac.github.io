@@ -204,92 +204,145 @@ SCENES.hero = {
 };
 
 /* ── MANTIS, after the paper's Fig. 1 ──
-   The frame enters the shared stem; the TaskDetector reads the stem's features (not the frame)
-   and its P_task drives the modulator, which conditions the encoder's ten cGDN sites. The compact
-   latent crosses the uplink and fans out to task decoder–head chains. Conceptual: the latent cells
-   and P_task bars are schematic. */
+   Split computing: the client (on the UAV) and the server (at the edge) are separate fields, and the
+   compressed latent ẑ has to cross the gap between them. On the client, the frame passes through
+   the shared stem into the encoder; the TaskDetector reads the stem's features and its P_task drives
+   the modulator, which conditions the encoder's ten cGDN sites. On the server, ẑ fans out to task
+   decoder → head chains. The smoke route is highlighted because this frame holds a new plume.
+   Conceptual: P_task, the latent cells and the outputs are schematic, not measured. */
 
 const MANTIS: Win = { x: 26, y: 26, w: 948, h: 650, r: 44 };
+const CLIENT = rounded(50, 70, 512, 540, 28), SERVER = rounded(640, 70, 310, 540, 28);
+const ROWS: ['urban' | 'wildlife' | 'smoke', number][] = [['urban', 180], ['wildlife', 318], ['smoke', 456]];
+
+/** A task output, as a small print: a segmentation mosaic, detected animals, or a boxed plume. */
+function taskOutput(g: G, ink: Ink, task: 'urban' | 'wildlife' | 'smoke', x: number, y: number, w: number, h: number, sr: () => number) {
+  const tile = rect(x, y, w, h);
+  if (task === 'urban') {
+    const cols = 6, rows = 4, cw = w / cols, ch = h / rows;
+    for (let j = 0; j < rows; j++) for (let i = 0; i < cols; i++) {
+      const cls = (i * 7 + j * 3 + (i > 3 && j > 1 ? 2 : 0)) % 4, c = rect(x + i * cw, y + j * ch, cw, ch);
+      if (ink === 'yellow' && (cls === 0 || cls === 2)) print(g, c, 0.85);
+      if (ink === 'green' && (cls === 1 || cls === 2)) print(g, c, 0.7);
+      if (ink === 'blue' && cls === 3) print(g, c, 0.7);
+      if (ink === 'pink' && cls === 0) print(g, c, 0.3);
+    }
+  }
+  if (task === 'wildlife') {
+    if (ink === 'green') print(g, tile, 0.5);
+    if (ink === 'yellow') print(g, tile, 0.4);
+    for (const [u, v, s] of [[0.24, 0.36, 1], [0.6, 0.64, 0.85], [0.8, 0.3, 0.75]]) {
+      const cx = x + u * w, cy = y + v * h, r = 6 * s;
+      const animal = cut(ringPts(cx, cy, r * 1.5, r, 8, 0.4), sr, 0.5);
+      carve(g, animal);
+      if (ink === 'indigo') print(g, animal, 0.9);
+      if (ink === 'pink') keyline(g, rect(cx - r * 2.3, cy - r * 2, r * 4.6, r * 4), 2.2);
+    }
+  }
+  if (task === 'smoke') {
+    const plume = cut([[x + w * 0.3, y + h * 0.8], [x + w * 0.22, y + h * 0.5], [x + w * 0.4, y + h * 0.22], [x + w * 0.78, y + h * 0.1], [x + w * 0.62, y + h * 0.42], [x + w * 0.44, y + h * 0.8]], sr, 1.2);
+    if (ink === 'yellow') { print(g, tile, 0.5); carve(g, plume); }
+    if (ink === 'green') print(g, rect(x, y + h * 0.74, w, h * 0.26), 0.7);
+    if (ink === 'indigo') { carve(g, plume); shade(g, plume, linear(g, x, y + h, x + w, y, [[0, 0.55], [1, 0.15]])); }
+    if (ink === 'pink') { print(g, disc(x + w * 0.36, y + h * 0.78, 3.5)); keyline(g, rect(x + w * 0.14, y + h * 0.06, w * 0.72, h * 0.8), 2.2); }
+  }
+  if (ink === 'indigo') keyline(g, tile, 2);
+}
 
 SCENES.mantis = {
-  h: 700, inks, screen: diagramScreen,
-  ground(g, ink) { inWindow(g, MANTIS, () => daylight(g, ink, MANTIS)); },
+  h: 700, inks,
   plates(g, ink, _rng, sr) {
-    const frame = rect(65, 213, 205, 220);
-    const enc = path([[382, 218], [530, 278], [530, 369], [382, 428]], true);
-    const stem = path([[303, 234], [326, 221], [326, 420], [303, 432]], true);
-    const detector = path([[288, 482], [342, 482], [332, 516], [298, 516]], true);
-    const plume = cut([[204, 398], [196, 372], [184, 342], [166, 308], [146, 276], [132, 246], [158, 238], [180, 262], [198, 296], [212, 336], [220, 382]], sr, 2);
+    // Client geometry.
+    const frame = rect(78, 205, 150, 150);
+    const plume = cut([[196, 330], [188, 306], [176, 282], [160, 256], [144, 232], [134, 214], [156, 210], [174, 230], [190, 256], [204, 290], [210, 322]], sr, 1.5);
     const roofs = new Path2D();
-    [[82, 326], [119, 357], [212, 252], [219, 404]].forEach(([x, y]) => roofs.rect(x, y, 27, 22));
+    [[90, 290], [118, 316], [196, 222], [96, 222]].forEach(([x, y]) => roofs.rect(x, y, 22, 17));
     const trees = new Path2D();
-    for (let i = 0; i < 20; i++) disc(78 + sr() * 180, 280 + sr() * 138, 5 + sr() * 7, trees);
-    const road = new Path2D(); road.moveTo(65, 395); road.bezierCurveTo(130, 380, 170, 300, 270, 262);
-    const heads = [224, 334, 444];
-    const pTask: [number, boolean][] = [[0.22, false], [0.14, false], [0.86, true]];   // urban, wildlife, smoke
-    const bar = (i: number, p: number) => rect(356 + i * 13, 516 - p * 40, 9, p * 40);
+    for (let i = 0; i < 16; i++) disc(90 + sr() * 125, 245 + sr() * 100, 4 + sr() * 6, trees);
+    const road = new Path2D(); road.moveTo(78, 342); road.bezierCurveTo(125, 330, 160, 268, 228, 244);
+    const slabs = [0, 1, 2].map(i => path([[252 + i * 12, 192 + i * 8], [272 + i * 12, 182 + i * 8], [272 + i * 12, 352 + i * 8], [252 + i * 12, 362 + i * 8]], true));
+    const enc = path([[334, 178], [474, 232], [474, 318], [334, 372]], true);
+    const sites = new Path2D();
+    for (let i = 0; i < 10; i++) { const x = 344 + i * 13, t = (x - 334) / 140; sites.moveTo(x, 182 + t * 50); sites.lineTo(x, 368 - t * 50); }
+    const detector = path([[246, 412], [304, 412], [294, 448], [256, 448]], true);
+    const pTask: [number, boolean][] = [[0.26, false], [0.16, false], [0.9, true]];     // urban, wildlife, smoke
+    const bar = (i: number, p: number) => rect(320 + i * 15, 452 - p * 56, 11, p * 56);
+    const modulator = disc(408, 430, 16);
     const latent: [Path2D, number][] = [];
-    for (let j = 0; j < 4; j++) for (let i = 0; i < 4; i++) latent.push([rect(581 + i * 14, 291 + j * 14, 10, 10), 0.2 + ((i * 3 + j * 7) % 9) / 10]);
-    const modulator = disc(447, 500, 14), ignition = disc(206, 399, 5);
-    const smokeGlyph = cut([[840, heads[2] + 6], [836, heads[2] - 8], [848, heads[2] - 22], [858, heads[2] - 26], [851, heads[2] + 5]], sr, 0.5);
+    for (let j = 0; j < 4; j++) for (let i = 0; i < 4; i++) latent.push([rect(494 + i * 13, 250 + j * 13, 10, 10), 0.25 + ((i * 3 + j * 7) % 9) / 11]);
+    // The uplink and the server fan-out.
+    const uplink = path([[550, 276], [668, 276]]);
+    const waves = new Path2D();
+    for (const r of [12, 22, 32]) { waves.moveTo(600 + r * Math.cos(-2.5), 250 + r * Math.sin(-2.5)); waves.arc(600, 250, r, -2.5, -0.64); }
+    const antenna = path([[600, 276], [600, 252]]);
+    const fan = path([[668, 180], [668, 456]]);
 
     inWindow(g, MANTIS, () => {
-      if (ink === 'yellow') {
-        plane(g, frame, 0.75); carve(g, roofs); carve(g, trees);
-        print(g, rect(795, heads[2] - 30, 130, 60), 0.55);                       // the routed head
-        pTask.forEach(([p, hot], i) => { if (hot) print(g, bar(i, p)); });
-        print(g, modulator, 0.9); print(g, ignition);
-      }
+      daylight(g, ink, MANTIS);
+      // The two fields: warm for the aircraft, cool for the edge.
+      if (ink === 'yellow') { plane(g, CLIENT, 0.24); carve(g, SERVER); }
+      if (ink === 'pink') { plane(g, CLIENT, 0.1); carve(g, SERVER); }
+      if (ink === 'blue') { carve(g, CLIENT); plane(g, SERVER, 0.18); }
+      if (ink === 'yellow') { g.save(); g.clip(SERVER); print(g, rect(640, ROWS[2][1] - 54, 310, 108), 0.45); g.restore(); }   // the routed chain
+      // Input frame.
+      if (ink === 'yellow') { plane(g, frame, 0.78); carve(g, roofs); carve(g, trees); }
+      if (ink === 'pink') { carve(g, frame); print(g, roofs, 0.5); g.save(); g.clip(frame); keyline(g, road, 8, 0.3); g.restore(); print(g, disc(200, 331, 4.5)); }
+      if (ink === 'green') { g.save(); g.clip(frame); print(g, trees, 0.85); g.restore(); }
+      if (ink === 'blue') { carve(g, frame); g.save(); g.clip(frame); print(g, roofs, 0.55); keyline(g, road, 8, 0.35); g.restore(); }
+      if (ink === 'indigo') { g.save(); g.clip(frame); carve(g, plume); shade(g, plume, linear(g, 200, 330, 140, 210, [[0, 0.7], [1, 0.1]])); g.restore(); keyline(g, frame, 2.4); }
+      // Stem, encoder and the task-conditioning loop.
+      if (ink === 'blue') { slabs.forEach((s, i) => plane(g, s, 0.45 + i * 0.12)); print(g, enc, 0.24); latent.forEach(([p, a]) => print(g, p, a)); }
+      if (ink === 'green') { plane(g, detector, 0.55); }
       if (ink === 'pink') {
-        plane(g, frame, 0.12);
-        g.save(); g.clip(frame); keyline(g, road, 9, 0.35); g.restore();
-        print(g, roofs, 0.55);
-        for (let i = 0; i < 10; i++) { const x = 389 + i * 13; keyline(g, path([[x, 225 + (x - 382) * 0.405], [x, 422 - (x - 382) * 0.4]]), 2.7, 0.9); }
-        print(g, ignition);
+        keyline(g, sites, 2.6, 0.9);
         pTask.forEach(([p, hot], i) => { if (hot) print(g, bar(i, p)); });
-        keyline(g, arrow(400, 500, 430, 500, 8), 3); print(g, modulator); keyline(g, arrow(447, 484, 447, 408, 10), 3);
-        keyline(g, rect(829, heads[1] - 17, 35, 29), 2.5); print(g, ellipse(846, heads[1] - 4, 9, 5));
-        keyline(g, rect(829, heads[2] - 17, 35, 29), 2.5);
+        print(g, modulator);
+        keyline(g, arrow(370, 430, 390, 430, 8), 3);
+        keyline(g, arrow(408, 412, 408, 352, 10), 3);
+        g.lineCap = 'round'; dashed(g, uplink, [2, 9], 4);
+        keyline(g, path([[668, 276], [668, ROWS[2][1]], [686, ROWS[2][1]]]), 4.5);
       }
-      if (ink === 'green') {
-        carve(g, frame);
-        g.save(); g.clip(frame); print(g, trees, 0.85); g.restore();
-        print(g, stem, 0.35); print(g, rect(800, heads[0] - 25, 120, 50), 0.6);
-      }
-      if (ink === 'blue') {
-        carve(g, frame);
-        g.save(); g.clip(frame); keyline(g, road, 9, 0.35); print(g, roofs, 0.5); g.restore();
-        print(g, stem, 0.75); print(g, enc, 0.3); latent.forEach(([p, a]) => print(g, p, a));
-        print(g, rect(800, heads[0] - 25, 120, 50), 0.25); print(g, rect(800, heads[1] - 25, 120, 50), 0.2);
-      }
+      if (ink === 'yellow') { pTask.forEach(([p, hot], i) => { if (hot) print(g, bar(i, p)); }); print(g, modulator, 0.9); }
       if (ink === 'indigo') {
-        keyline(g, frame, 2.6);
-        g.save(); g.clip(frame); carve(g, plume); shade(g, plume, linear(g, 210, 400, 140, 240, [[0, 0.7], [1, 0.12]])); g.restore();
-        keyline(g, stem, 2); keyline(g, enc, 2.4); keyline(g, detector, 2);
-        pTask.forEach(([p, hot], i) => { if (!hot) print(g, bar(i, p), 0.8); });
-        keyline(g, arrow(275, 323, 299, 323, 7), 2.4); keyline(g, arrow(338, 323, 372, 323, 8), 2.4); keyline(g, arrow(538, 323, 570, 323, 8), 2.4);
-        keyline(g, arrow(315, 434, 315, 476, 7), 2.2);                                    // stem features → detector
-        dashed(g, path([[642, 321], [731, 321]]), [5, 8], 3);
-        keyline(g, path([[734, 224], [734, 444]]), 2);
-        heads.forEach(y => { keyline(g, arrow(734, y, 785, y, 8), 2); keyline(g, rect(795, y - 30, 130, 60), 2); });
-        const seg = new Path2D();
-        for (let i = 0; i < 4; i++) { seg.moveTo(809 + i * 29, 199); seg.lineTo(815 + i * 29, 249); }
-        keyline(g, seg, 2, 0.7);
-        print(g, smokeGlyph, 0.55);
+        slabs.forEach(s => keyline(g, s, 1.8));
+        keyline(g, enc, 2.4); keyline(g, detector, 2);
+        pTask.forEach(([p, hot], i) => { if (!hot) print(g, bar(i, p), 0.75); });
+        keyline(g, arrow(232, 280, 248, 280, 7), 2.4);
+        keyline(g, arrow(302, 280, 328, 280, 8), 2.4);
+        keyline(g, arrow(478, 276, 490, 276, 6), 2.4);
+        keyline(g, arrow(272, 372, 272, 406, 7), 2.2);                                          // stem features → detector
+        keyline(g, arrow(306, 430, 318, 430, 6), 2);
+        keyline(g, antenna, 2.4); keyline(g, waves, 2, 0.75);
+        keyline(g, fan, 2);
       }
+      // Server: decoder → head → output, one chain per task.
+      ROWS.forEach(([task, y]) => {
+        const routed = task === 'smoke';
+        const decoder = path([[690, y - 12], [740, y - 28], [740, y + 28], [690, y + 12]], true);
+        const head = rect(758, y - 20, 28, 40);
+        if (ink === 'green') plane(g, decoder, routed ? 0.75 : 0.4);
+        if (ink === 'indigo') {
+          keyline(g, arrow(668, y, 686, y, 6), 2);
+          keyline(g, decoder, 2); print(g, head, routed ? 0.95 : 0.55);
+          keyline(g, arrow(742, y, 756, y, 6), 2); keyline(g, arrow(788, y, 804, y, 6), 2);
+        }
+        taskOutput(g, ink, task, 810, y - 38, 118, 76, rngFor('mantis-out-' + task));
+      });
     });
   },
   annotate(g) {
-    label(g, '01  OBSERVE', 66, 159, 22); label(g, '02  ENCODE', 373, 159, 22); label(g, '03  INFER', 758, 159, 22);
-    label(g, 'cGDN × 10', 456, 204, 14, 'pink', 'center');
-    label(g, 'TASK DETECTOR', 315, 545, 14, 'indigo', 'center');
-    label(g, 'P(task)', 382, 470, 14, 'pink', 'center');
-    label(g, 'MODULATOR', 447, 545, 14, 'pink', 'center');
-    label(g, 'COMPACT LATENT', 573, 399, 16);
-    label(g, 'Urban', 860, 283, 15, 'indigo', 'center'); label(g, 'Wildlife', 860, 393, 15, 'indigo', 'center'); label(g, 'Smoke', 860, 503, 15, 'indigo', 'center');
-    label(g, 'UPLINK', 685, 300, 15, 'pink', 'center');
-    rule(g, [[62, 601], [938, 601]], 'indigo', 0.4, 1);
-    label(g, 'ON THE UAV', 66, 640, 17); label(g, 'AT THE EDGE', 938, 640, 17, 'indigo', 'right');
+    label(g, 'INPUT FRAME', 153, 388, 14, 'indigo', 'center');
+    label(g, 'SHARED STEM', 280, 164, 14, 'indigo', 'center');
+    label(g, 'ENCODER', 404, 150, 15, 'indigo', 'center'); label(g, 'cGDN × 10', 404, 170, 13, 'pink', 'center');
+    label(g, 'TASK DETECTOR', 262, 482, 13, 'indigo', 'center');
+    label(g, 'P(task)', 343, 384, 13, 'pink', 'center');
+    label(g, 'MODULATOR', 420, 482, 13, 'pink', 'center');
+    label(g, 'ẑ', 519, 238, 20, 'indigo', 'center');
+    label(g, 'UPLINK', 600, 318, 13, 'pink', 'center');
+    label(g, 'DECODER → HEAD', 750, 122, 13, 'indigo', 'center');
+    ROWS.forEach(([task, y]) => label(g, { urban: 'Urban segmentation', wildlife: 'Wildlife detection', smoke: 'Smoke detection' }[task], 869, y + 56, 13, 'indigo', 'center'));
+    label(g, 'CLIENT · ON THE UAV', 74, 590, 15);
+    label(g, 'SERVER · AT THE EDGE', 928, 590, 15, 'indigo', 'right');
   },
 };
 
