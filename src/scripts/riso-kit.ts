@@ -4,23 +4,32 @@
 export type Ink = keyof typeof INK;
 export type Rng = () => number;
 export type Plates = (g: CanvasRenderingContext2D, ink: Ink, rng: Rng, sr: Rng) => void;
-export interface Scene { h: number; inks: Ink[]; plates: Plates; }
+/** A scene: height in 1000-wide units, its inks, the plate drawing, and optional crisp notation
+    printed after the plates. `labelsFrom` is the smallest CSS width at which notation is legible. */
+export interface Scene {
+  h: number; inks: Ink[]; plates: Plates;
+  ground?: Plates;
+  screen?: { pitch: number; texture: number; registration: number };
+  annotate?: (g: CanvasRenderingContext2D) => void;
+  labelsFrom?: number;
+}
 
-/* Inks, from the riso drum catalogue: Sunflower, Bright Red, Teal and Federal Blue, with Mint and
-   Fluorescent Orange in reserve. Federal Blue stands in for black. */
+/* The riso drum inks from sevenevesai/riso-windowseat. Secondary colours come from overprinting:
+   yellow + pink prints orange, blue + pink lavender, yellow + blue green. Indigo stands in for black. */
 export const INK = {
-  sun: '#FFB511', red: '#F15060', teal: '#00838A', navy: '#3D5588', mint: '#82D8D5', coral: '#FF7477',
+  yellow: '#FFE800', pink: '#FF48B0', blue: '#0078BF', green: '#00A95C',
+  orange: '#FF6C2F', violet: '#765BA7', indigo: '#2E3192',
 };
 
 // Rational tangents (b/a), so each rotated dot grid tiles without a seam.
 export const SCREEN: Record<Ink, [number, number]> = {
-  sun: [1, 0], red: [1, 4], teal: [4, 1], navy: [1, 1], mint: [2, 1], coral: [1, 2],
+  yellow: [1, 0], pink: [1, 4], blue: [4, 1], green: [1, 1], orange: [2, 1], violet: [1, 2], indigo: [1, 1],
 };
-// Fixed misregistration per plate, in CSS px.
+// Fixed misregistration per plate, in CSS px: enough to see on a contour, never enough to blur it.
 export const REG: Record<Ink, [number, number]> = {
-  sun: [1.3, 1], red: [-1.5, 1.2], teal: [1, -0.7], navy: [0, 0], mint: [-1, -1], coral: [0.7, 1.3],
+  yellow: [1.1, 0.8], pink: [-1.1, 0.9], blue: [0.8, -0.6], green: [-0.8, -0.8], orange: [0.6, 1], violet: [-0.9, -0.5], indigo: [0, 0],
 };
-export const PITCH = 3.6;  // CSS px between dot centres
+export const PITCH = 2.6;  // CSS px between dot centres
 export const U = 1000;     // scenes draw in a 1000-unit-wide space
 export const TAU = Math.PI * 2;
 

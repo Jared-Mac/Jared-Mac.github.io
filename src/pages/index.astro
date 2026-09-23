@@ -2,47 +2,45 @@
 import Base from '../layouts/Base.astro';
 import PublicationRow from '../components/PublicationRow.astro';
 import ProjectCard from '../components/ProjectCard.astro';
-import { publications, projects, profile } from '../lib/content';
+import { publications, projects } from '../lib/content';
 const current = projects.filter(p => ['mantis', 'shield'].includes(p.slug));
-const interests = profile.data.interests as string[];
+const earlier = projects.filter(p => !['mantis', 'shield'].includes(p.slug));
 ---
 <Base>
   <div class="wrap home-page">
-    <section class="intro">
-      <div>
-        <p class="kicker">PhD Student in Computer Science · <a href="https://uci.edu/">University of California, Irvine</a></p>
-        <h1 class="riso-title" data-text="Jared Macshane">Jared Macshane</h1>
-        <div class="bio-text">
-          <p>I am a PhD student in the Distributed Systems Middleware Group at UC Irvine. My research focuses on distributed machine-learning systems for resource-constrained edge environments, particularly task-informed neural compression and progressive inference.</p>
-          <p>I study how sensing platforms can preserve task accuracy while reducing communication and computation costs, with applications in environmental monitoring and disaster resilience. Previously, I worked on geospatial machine learning at CSU San Marcos and computer vision for wildlife conservation at the San Diego Zoo Wildlife Alliance.</p>
+    <section class="home-hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <h1 id="hero-title" class="hero-name">Jared Macshane <span>PhD student in computer science, UC Irvine</span></h1>
+        <p class="hero-title">Intelligence,<br />closer to<br /><em>the world.</em></p>
+        <div class="hero-introduction">
+          <figure class="portrait"><div class="portrait-image"><canvas data-riso-photo="#portrait-photo" data-crop="170 200 440 520" aria-hidden="true"></canvas><img id="portrait-photo" src="/images/jared.jpg" alt="Jared Macshane" width="960" height="720" fetchpriority="high" /></div></figure>
+          <p class="hero-deck">I build machine-learning systems for the places where bandwidth, computation, and time are limited.</p>
         </div>
-        <div class="profile-links"><a class="stamp" href="mailto:jmacshan@uci.edu">Email</a><a class="stamp" href="/uploads/resume.pdf">CV</a><a class="stamp" href="https://github.com/Jared-Mac">GitHub</a><a class="stamp" href="https://www.linkedin.com/in/jared-macshane-733971b9">LinkedIn</a></div>
+        <div class="hero-actions"><a class="text-link" href="#research">Explore the research ↓</a></div>
       </div>
-      <figure class="portrait">
-        <canvas data-riso-photo="#portrait-photo" data-crop="170 200 440 520" aria-hidden="true"></canvas>
-        <img id="portrait-photo" src="/images/jared.jpg" alt="Jared Macshane" width="960" height="720" fetchpriority="high" />
-        <figcaption>Akihabara, Tokyo</figcaption>
+      <figure class="hero-figure">
+        <canvas data-riso="hero" role="img" aria-label="A drone observes a mountainous landscape, compresses what it sees, and sends compact information to an edge-computing station."></canvas>
+        <figcaption>From the field to the edge.</figcaption>
       </figure>
     </section>
 
-    <figure class="plate">
-      <canvas data-riso="hero" role="img" aria-label="Risograph-style illustration: a drone hovers over a mountain range at dusk and sends a stream of shrinking packets to an edge-computing mast on the near ridge."></canvas>
-      <figcaption class="plate-caption"><span><b>Plate 01</b> Split inference over the ridge</span><span>A UAV sends compact latents, not frames, to the edge.</span></figcaption>
-    </figure>
-
-    <section class="section">
-      <h2>Research interests</h2>
-      <ul class="chips">{interests.map(interest => <li>{interest}</li>)}</ul>
-    </section>
-    <section class="section">
-      <div class="section-heading"><h2>Current research</h2></div>
+    <section class="research-section section" id="research">
+      <div class="section-heading"><h2>Research</h2><a class="section-link" href="/projects/">All projects ↗</a></div>
       <div class="project-grid">{current.map(project => <ProjectCard project={project} />)}</div>
-      <p class="section-link"><a href="/projects/">All research projects →</a></p>
+      <div class="project-grid compact">{earlier.map(project => <ProjectCard project={project} />)}</div>
     </section>
-    <section class="section">
-      <div class="section-heading"><h2>Selected publications</h2></div>
+
+    <section class="section home-publications">
+      <div class="section-heading"><h2>Selected publications</h2><a class="section-link" href="/publications/">All publications ↗</a></div>
       <div>{publications.filter(p => p.featured).map(entry => <PublicationRow entry={entry} />)}</div>
-      <p class="section-link"><a href="/publications/">Complete publication list →</a></p>
+    </section>
+
+    <section class="section about-section" aria-labelledby="about-title">
+      <h2 id="about-title">About</h2>
+      <div class="about-copy">
+        <div class="bio-text"><p>I am a PhD student in the Distributed Systems Middleware Group at UC Irvine. My research focuses on distributed machine-learning systems for resource-constrained edge environments, particularly task-informed neural compression and progressive inference.</p><p>I study how sensing platforms can preserve task accuracy while reducing communication and computation costs, with applications in environmental monitoring and disaster resilience. Previously, I worked on geospatial machine learning at CSU San Marcos and computer vision for wildlife conservation at the San Diego Zoo Wildlife Alliance.</p></div>
+        <div class="profile-links"><a href="mailto:jmacshan@uci.edu">Email</a><a href="https://github.com/Jared-Mac">GitHub</a><a href="https://www.linkedin.com/in/jared-macshane-733971b9">LinkedIn</a><a href="/experience/">Experience</a></div>
+      </div>
     </section>
   </div>
 </Base>

@@ -1,20 +1,32 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { projects, publications, projectKicker, projectImage, projectFigure, markdown, slugify } from '../../lib/content';
+import ResearchFigure from '../../components/ResearchFigure.astro';
+import { projects, publications, projectKicker, designOf, projectImage, projectFigure, markdown, slugify } from '../../lib/content';
 import type { Entry } from '../../lib/content';
 export function getStaticPaths() { return projects.map(project => ({ params: { slug: project.slug }, props: { project } })); }
 interface Props { project: Entry; }
 const { project } = Astro.props;
 const related = publications.filter(p => p.url_project === project.path);
 const next = projects[(projects.findIndex(p => p.slug === project.slug) + 1) % projects.length];
+const design = designOf(project);
+// Give the original measured figures their own readable, full-width plates below the text.
+const body = project.slug === 'mantis' ? project.body.replace(/!\[[^\]]*\]\([^)]*\)/g, '') : project.body;
+const results = [
+  { file: 'architecture.png', title: 'The MANTIS architecture', caption: 'The original system diagram: task estimation, conditional encoding, and inference at the edge.' },
+  { file: 'e2e-latency.png', title: 'From capture to inference', caption: 'End-to-end latency across the evaluated task workloads.' },
+  { file: 'channel-usage-bpp.png', title: 'Where the bits go', caption: 'Mean bitrate contributed by each of the 48 latent channels for urban segmentation (UAVid), wildlife detection (WAID), and smoke detection (Boreal Fire).' },
+  { file: 'a10-fp16-baselines.png', title: 'Measuring the tradeoff', caption: 'Baseline comparisons on A10 hardware with FP16 precision.' },
+];
 ---
 <Base title={`${project.title} — Jared Macshane`} description={project.summary} image={projectImage(project.slug)}>
   <article class="wrap detail-page">
-    <header class="page-intro"><a class="back-link" href="/projects/">← All research</a><p class="eyebrow">{projectKicker[project.slug]}</p><h1>{project.title}</h1><p>{project.summary}</p><div class="tag-list">{project.tags.map(tag => <a href={`/tags/${slugify(tag)}/`}>{tag}</a>)}</div></header>
-    <figure class="detail-figure"><div class="detail-cover"><canvas data-riso={project.slug} aria-hidden="true"></canvas></div><figcaption>{projectFigure[project.slug]}</figcaption></figure>
-    {project.slug === 'trail-mapping' && <figure class="detail-figure steps-figure"><div class="steps-cover"><canvas data-riso="trail-steps" aria-hidden="true"></canvas></div><figcaption><ol><li><b>Grow.</b> Each fix is presented in turn; the nearest neuron and its neighbours within r adapt toward it, and a fix farther than GT = −2 ln SF from every neuron grows a new one.</li><li><b>Connect.</b> Each fix joins its two nearest neurons with an edge, which over-connects into false triangles (red).</li><li><b>Collapse and smooth.</b> Triangles contract to the mean of their neurons, then weights adapt again at 2r and r/2 with no growth.</li></ol></figcaption></figure>}
-    <div class="detail-grid"><aside class="detail-aside"><span class="eyebrow">Research project</span><p>{project.year}</p>{related.filter(p => p.publication_status === 'forthcoming').map(p => <p class="review-label">{p.publication}</p>)}{related.length > 0 && <div><span class="eyebrow">Related publications</span>{related.map(p => <a class="aside-link" href={p.path}>{p.title}</a>)}</div>}</aside><div class="prose" set:html={markdown(project.body)} /></div>
-    {project.slug === 'mantis' && <section class="supporting-figures"><div class="section-heading"><h2>Additional results</h2></div><figure><img src="/uploads/mantis/channel-usage-bpp.png" alt="Task-conditioned latent channel usage across bitrate operating points" loading="lazy" /><figcaption>Task conditioning changes how the compressed representation allocates bitrate.</figcaption></figure><figure><img src="/uploads/mantis/a10-fp16-baselines.png" alt="MANTIS evaluation against baseline methods on A10 hardware with FP16 precision" loading="lazy" /><figcaption>Baseline comparisons from the MANTIS evaluation.</figcaption></figure></section>}
-    <a class="next-project" href={next.path}><span>{next.title}</span><span class="eyebrow">Next project →</span></a>
+    <header class="page-intro project-intro"><a class="back-link" href="/projects/">← Research</a><div class="project-title-grid"><div><p class="eyebrow">{design.title === project.title ? projectKicker[project.slug] : `${project.title} · ${projectKicker[project.slug]}`}</p><h1>{design.title}</h1></div><div class="project-standfirst"><p>{project.summary}</p><span class="folio">{project.year}</span></div></div><div class="tag-list">{project.tags.map(tag => <a href={`/tags/${slugify(tag)}/`}>{tag}</a>)}</div></header>
+    <ResearchFigure scene={project.slug} title={design.figure} caption={projectFigure[project.slug]} />
+    {project.components && <section class="project-components" aria-label="Parts of this project"><h2>Code</h2><div class="component-grid">{project.components.map(component => <a class="component-link" href={component.url}><span class="eyebrow">{component.focus}</span><h3>{component.name} <span aria-hidden="true">↗</span></h3><p>{component.summary}</p></a>)}</div></section>}
+    <div class:list={['detail-grid', { 'without-aside': related.length === 0 }]}>{related.length > 0 && <aside class="detail-aside"><p class="eyebrow">Related publications</p>{related.map(p => <a class="aside-link" href={p.path}>{p.title}</a>)}{related.filter(p => p.publication_status === 'forthcoming').map(p => <p class="review-label">{p.publication}</p>)}</aside>}<div class="prose" set:html={markdown(body)} /></div>
+    {project.slug === 'trail-mapping' && <ResearchFigure scene="trail-steps" number="02" title="How a network emerges" caption="Three stages of the same synthetic-data run. First, neurons grow and adapt to nearby fixes. Connecting each fix’s two nearest neurons introduces edges and false triangles. The final stage collapses those triangles and smooths the remaining network." />}
+    {project.slug === 'wildfire' && <ResearchFigure scene="wildfire-model" number="02" title="One observation, several possible futures" caption="Firegen’s inference path: the current fire frame, wind speed, and wind direction condition a latent distribution. Samples from that distribution are decoded into possible next fire states. The three maps illustrate repeated sampling; they are schematic, not outputs from a trained model. During training, the observed next frame supplies the target." />}
+    {project.slug === 'mantis' && <section class="supporting-figures"><div class="section-heading"><h2>Research figures</h2></div>{results.map((result, i) => <figure class="result-figure"><div class="figure-heading"><span>{result.title}</span><a href={`/uploads/mantis/${result.file}`} target="_blank" rel="noopener">Full resolution ↗</a></div><a class="result-image" href={`/uploads/mantis/${result.file}`} target="_blank" rel="noopener" aria-label={`Open ${result.title} at full resolution`}><img src={`/uploads/mantis/${result.file}`} alt={result.caption} loading="lazy" /></a><figcaption><span class="caption-label">Fig. {String(i + 2).padStart(2, '0')}</span><p>{result.caption}</p></figcaption></figure>)}</section>}
+    <a class="next-project" href={next.path}><span><span class="eyebrow">Next project</span><span>{designOf(next).title}</span></span><span aria-hidden="true">→</span></a>
   </article>
 </Base>

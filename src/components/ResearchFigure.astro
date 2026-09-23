@@ -1,0 +1,9 @@
+---
+interface Props { scene: string; title: string; caption: string; number?: string; }
+const { scene, title, caption, number = '01' } = Astro.props;
+---
+<figure class="research-figure">
+  <div class="figure-heading"><span>{title}</span><button type="button" class="figure-expand" data-expand-scene={scene} data-figure-title={title} aria-label={`Enlarge ${title}`} aria-haspopup="dialog">Enlarge <span aria-hidden="true">↗</span></button></div>
+  <div class:list={['figure-art', { 'steps-art': scene === 'trail-steps' }]}><canvas data-riso={scene} aria-hidden="true"></canvas></div>
+  <figcaption><span class="caption-label">Fig. {number}</span><p>{caption}</p></figcaption>
+</figure>

@@ -1,11 +1,10 @@
 ---
-import { projectKicker, type Entry } from '../lib/content';
+import { projectKicker, designOf, type Entry } from '../lib/content';
 interface Props { project: Entry; index?: number; }
 const { project } = Astro.props;
+const design = designOf(project);
 ---
-<article class="project-card">
+<article class="project-card" data-project={project.slug}>
   <div class="print"><canvas data-riso={project.slug} aria-hidden="true"></canvas></div>
-  <p class="card-kicker">{project.year} · {projectKicker[project.slug]}</p>
-  <h3><a href={project.path}>{project.title}</a></h3>
-  <p>{project.summary}</p>
+  <div class="project-copy"><p class="card-kicker">{projectKicker[project.slug]}</p><h3><a href={project.path}>{design.title}</a></h3><p class="project-summary">{project.summary}</p></div>
 </article>

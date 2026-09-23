@@ -27,6 +27,15 @@ Run `npm run preview` to serve the production build.
 - `src/pages/index.astro`: homepage introduction and featured research.
 - `src/styles/global.css`: design system and responsive layouts.
 
+The visual system is a scientific field atlas, with editorial typography and
+procedural risograph illustrations. `src/scripts/riso-scenes.ts` defines the
+illustrated plates; `riso-kit.ts` supplies the ink palette and drawing
+primitives, and `riso.ts` handles halftones, compositing, the portrait, and the
+figure enlargement dialog. Technical diagrams use soft background plates and
+finer foreground screens to keep their linework readable. Figure captions distinguish conceptual scenes from
+the trail algorithm's synthetic-data run. Original MANTIS result plots retain
+their source pixels and are available at full resolution on the project page.
+
 Existing Markdown front matter is supported directly; no content conversion is
 needed. Entries marked `draft: true` are excluded. The name `admin` in publication
 author lists renders as Jared Macshane. Search and year filters run in the browser;
