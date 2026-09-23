@@ -1,0 +1,69 @@
+---
+/* One print at a time: a numbered research index beside a single sticky riso print. Pointing at
+   or focusing a project swaps the print and quiets the other titles; leaving the list returns to
+   the default plate. On narrow screens the stage is dropped and each entry carries its own print. */
+import { designOf, projectKicker, type Entry } from '../lib/content';
+interface Props { projects: Entry[]; current?: string[]; lead?: { scene: string; caption: string; label: string }; summaries?: boolean; }
+const { projects, current = [], lead, summaries = false } = Astro.props;
+const plates = [
+  ...(lead ? [{ id: lead.scene, caption: lead.caption, number: '00', hero: true }] : []),
+  ...projects.map((p, i) => ({ id: p.slug, caption: designOf(p).figure, number: String(i + 1).padStart(2, '0'), hero: false })),
+];
+const first = plates[0];
+---
+<div class="light-table" data-light-table data-default={first.id}>
+  <div class="table-text">
+    <slot />
+    <ol class="plate-index" aria-label="Research projects">
+      {projects.map((project, i) => (
+        <li>
+          <a class="plate-item" href={project.path} data-plate={project.slug}>
+            <span class="plate-number">{String(i + 1).padStart(2, '0')}</span>
+            <span class="plate-body">
+              <span class="plate-title">{designOf(project).title}</span>
+              <span class="plate-meta">{projectKicker[project.slug] ?? project.title}{current.includes(project.slug) && <span class="plate-current">Current</span>}</span>
+              {summaries && <span class="plate-summary">{project.summary}</span>}
+            </span>
+            <span class="plate-thumb" aria-hidden="true"><canvas data-riso={project.slug}></canvas></span>
+          </a>
+        </li>
+      ))}
+    </ol>
+  </div>
+  <figure class:list={['table-stage', { 'is-plain': !lead }]} aria-hidden={lead ? undefined : 'true'}>
+    <div class="stage-frame">
+      {plates.map(plate => (
+        <canvas
+          class:list={['stage-plate', { 'is-active': plate === first, 'is-lead': plate.hero }]}
+          data-riso={plate.id}
+          data-stage={plate.id}
+          data-caption={`${plate.number} — ${plate.caption}`}
+          style={`aspect-ratio: 1000 / ${plate.hero ? 920 : 700}`}
+          {...(plate.hero && lead ? { role: 'img', 'aria-label': lead.label } : { 'aria-hidden': 'true' })}
+        ></canvas>
+      ))}
+    </div>
+    <figcaption class="stage-caption" aria-hidden="true">{`${first.number} — ${first.caption}`}</figcaption>
+  </figure>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-light-table]').forEach(table => {
+    const plates = [...table.querySelectorAll<HTMLCanvasElement>('[data-stage]')];
+    const caption = table.querySelector('.stage-caption')!;
+    const list = table.querySelector('.plate-index')!;
+    const show = (id: string) => {
+      plates.forEach(p => p.classList.toggle('is-active', p.dataset.stage === id));
+      const active = plates.find(p => p.dataset.stage === id);
+      if (active) caption.textContent = active.dataset.caption!;
+      table.querySelectorAll<HTMLElement>('[data-plate]').forEach(item => item.classList.toggle('is-active', item.dataset.plate === id));
+      table.classList.toggle('is-browsing', id !== table.dataset.default);
+    };
+    table.querySelectorAll<HTMLElement>('[data-plate]').forEach(item => {
+      item.addEventListener('pointerenter', () => show(item.dataset.plate!));
+      item.addEventListener('focus', () => show(item.dataset.plate!));
+    });
+    list.addEventListener('pointerleave', () => show(table.dataset.default!));
+    list.addEventListener('focusout', e => { if (!list.contains((e as FocusEvent).relatedTarget as Node)) show(table.dataset.default!); });
+  });
+</script>

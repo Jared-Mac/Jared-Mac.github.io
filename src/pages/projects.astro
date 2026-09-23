@@ -1,11 +1,15 @@
 ---
 import Base from '../layouts/Base.astro';
-import ProjectCard from '../components/ProjectCard.astro';
+import LightTable from '../components/LightTable.astro';
 import { projects } from '../lib/content';
 ---
 <Base title="Research & projects — Jared Macshane" description="Research in task-informed compression, edge intelligence, disaster-resilience digital twins, geospatial machine learning, and immersive science labs.">
-  <div class="wrap research-index">
-    <header class="page-intro"><h1>Research</h1><p>Machine learning under constraints on bandwidth, computation, and time.</p></header>
-    <section class="section" aria-label="Research projects"><div class="project-grid">{projects.map(project => <ProjectCard project={project} />)}</div></section>
+  <div class="wrap research-page">
+    <LightTable projects={projects} current={['mantis', 'shield']} summaries>
+      <header class="statement-block">
+        <h1 class="statement">Research</h1>
+        <p class="statement-meta">Machine learning under constraints on bandwidth, computation, and time.</p>
+      </header>
+    </LightTable>
   </div>
 </Base>
