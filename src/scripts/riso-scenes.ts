@@ -99,107 +99,236 @@ function compass(g: G, x: number, y: number, color: NoteInk = 'indigo') {
   label(g, 'N', x, y - 40, 16, color, 'center');
 }
 
-/* ── Plate 01, home: a UAV over farmland at golden hour sends shrinking packets to an edge mast ── */
+/* ── Plate 01, home: sense, compress, infer ──
+   UAV imagery of a wildfire at the wildland–urban interface crosses a constrained wireless link.
+   Short step captions correspond to fuller HTML explanations that stay legible on narrow screens.
+   Essential linework belongs to the ink plates, not the optional annotation layer. */
 
 const HERO: Win = { x: 30, y: 30, w: 940, h: 860, r: 52 };
+const HERO_DRONE = { x: 250, y: 302 };
+const HERO_EDGE = { x: 762, y: 492, w: 148, h: 224 };
+const HERO_FOOT = { x: 282, y: 752, rx: 164, ry: 48 };
+
+/** Conifers, houses and flames share a simple silhouette language at scene and thumbnail scales. */
+function heroPine(x: number, y: number, h: number) {
+  return path([[x, y - h], [x - h * 0.22, y - h * 0.62], [x - h * 0.12, y - h * 0.62],
+    [x - h * 0.34, y - h * 0.2], [x - h * 0.055, y - h * 0.2], [x - h * 0.055, y],
+    [x + h * 0.055, y], [x + h * 0.055, y - h * 0.2], [x + h * 0.34, y - h * 0.2],
+    [x + h * 0.12, y - h * 0.62], [x + h * 0.22, y - h * 0.62]], true);
+}
+
+function heroHouse(g: G, ink: Ink, x: number, y: number, s: number) {
+  const walls = rect(x, y - 29 * s, 48 * s, 29 * s);
+  const roof = path([[x - 5 * s, y - 29 * s], [x + 24 * s, y - 52 * s], [x + 53 * s, y - 29 * s]], true);
+  carve(g, walls); carve(g, roof);
+  if (ink === 'yellow') print(g, walls, 0.18);
+  if (ink === 'blue') print(g, roof, 0.6);
+  if (ink === 'indigo') {
+    keyline(g, walls, 2.5 * s, 0.9); keyline(g, roof, 2.5 * s, 0.9);
+    print(g, rect(x + 21 * s, y - 18 * s, 9 * s, 18 * s), 0.85);
+    for (const offset of [7, 35]) print(g, rect(x + offset * s, y - 21 * s, 7 * s, 8 * s), 0.85);
+  }
+}
+
+function heroFlame(x: number, y: number, w: number, h: number) {
+  const p = new Path2D();
+  p.moveTo(x, y);
+  p.bezierCurveTo(x - w, y - h * 0.12, x - w * 0.75, y - h * 0.48, x - w * 0.3, y - h * 0.66);
+  p.quadraticCurveTo(x - w * 0.3, y - h * 0.35, x, y - h * 0.48);
+  p.quadraticCurveTo(x + w * 0.42, y - h * 0.73, x + w * 0.1, y - h);
+  p.bezierCurveTo(x + w, y - h * 0.64, x + w, y - h * 0.15, x, y);
+  p.closePath();
+  return p;
+}
+
+/** Repeat the wildfire and nearby homes in the captured image and the server's detection result. */
+function heroObservation(g: G, ink: Ink, x: number, y: number, w: number, h: number, detected = false) {
+  g.save();
+  g.translate(x, y); g.scale(w / 120, h / 96); g.clip(rect(0, 0, 120, 96));
+  const ground = path([[0, 48], [22, 34], [51, 50], [78, 43], [120, 59], [120, 96], [0, 96]], true);
+  const trees = new Path2D();
+  for (const [tx, ty, height] of [[12, 64, 23], [28, 60, 26], [17, 87, 26], [35, 86, 23]]) trees.addPath(heroPine(tx, ty, height));
+  const plume = new Path2D();
+  plume.moveTo(52, 61); plume.bezierCurveTo(40, 47, 48, 36, 54, 30);
+  plume.bezierCurveTo(49, 20, 67, 10, 80, 11);
+  plume.bezierCurveTo(75, 27, 64, 29, 64, 42);
+  plume.quadraticCurveTo(62, 52, 60, 61); plume.closePath();
+  const flames = heroFlame(54, 74, 10, 28);
+  if (ink === 'blue') print(g, rect(0, 0, 120, 96), 0.08);
+  if (ink === 'yellow') print(g, ground, 0.32);
+  if (ink === 'green') { print(g, ground, 0.18); print(g, trees, 0.9); }
+  heroHouse(g, ink, 82, 72, 0.5);
+  heroHouse(g, ink, 76, 94, 0.6);
+  carve(g, plume); carve(g, flames);
+  if (ink === 'indigo') shade(g, plume, linear(g, 54, 63, 74, 11, [[0, 0.65], [1, 0.2]]));
+  if (ink === 'yellow') print(g, flames, 1);
+  if (ink === 'pink') {
+    print(g, flames, 0.8); carve(g, heroFlame(54, 72, 4, 13));
+    if (detected) { keyline(g, rect(39, 7, 44, 71), 3); print(g, rect(39, 3, 18, 6)); }
+  }
+  g.restore();
+}
 
 SCENES.hero = {
-  h: 920, inks, labelsFrom: 420,
+  h: 920, inks, labelsFrom: 280,
+  screen: { pitch: 2.35, texture: 0.58, registration: 0.65 },
   plates(g, ink, _rng, sr) {
-    const horizon = 560, vx = 520;
-    const far = ridge(peaksAt(horizon - 20, sr, 150, 6), 920);
-    const mid = ridge(ridgeAt(horizon + 8, sr, 26, 5, 0.02), 920);
-    const sun = cut(ringPts(705, 395, 62, 62, 16), sr, 1);
-    const drone = { x: 320, y: 250 }, mast = { x: 832, base: 612, top: 380 };
-    // Fields in perspective: rows radiating from a vanishing point, cut by bands that close in.
-    const rays = [-900, -560, -330, -170, -40, 90, 230, 400, 640, 980, 1500];
-    const bands = [horizon + 10, 585, 616, 660, 725, 815, 940];
-    const at = (ray: number, y: number) => vx + ray * (y - horizon + 60) / 440;
-    const patches: [Path2D, number][] = [];
-    for (let b = 0; b < bands.length - 1; b++) for (let r = 0; r < rays.length - 1; r++) {
-      const y0 = bands[b], y1 = bands[b + 1];
-      patches.push([path([[at(rays[r], y0), y0], [at(rays[r + 1], y0), y0], [at(rays[r + 1], y1), y1], [at(rays[r], y1), y1]], true), (b * 3 + r * 5) % 4]);
+    const horizon = 544;
+    const far = ridge(peaksAt(horizon - 8, sr, 100, 5), 920);
+    const mid = ridge(ridgeAt(horizon + 9, sr, 24, 4, 0.02), 920);
+    const { x: dx, y: dy } = HERO_DRONE, edge = HERO_EDGE, foot = HERO_FOOT;
+
+    // Wooded slopes meet a small neighborhood; the fire burns on the vegetation side.
+    const ground = ridge(ridgeAt(horizon + 47, sr, 40, 4, 0.035), 920);
+    const woodland = cut([[-30, 627], [89, 580], [192, 604], [293, 630], [359, 688],
+      [343, 761], [400, 832], [431, 951], [-30, 951]], sr, 2);
+    const trees = new Path2D();
+    for (const [x, y, h] of [[56, 611, 32], [93, 607, 42], [139, 610, 36], [177, 624, 43],
+      [210, 621, 31], [272, 607, 36], [311, 618, 43], [354, 642, 48], [378, 665, 39],
+      [62, 690, 49], [105, 701, 60], [153, 688, 54], [185, 718, 40], [72, 784, 64],
+      [125, 818, 62], [167, 849, 55], [211, 835, 62], [348, 810, 54], [389, 833, 48]]) {
+      trees.addPath(heroPine(x, y, h));
     }
-    const fields = rect(0, horizon + 10, 1000, 400);
-    const hedge = new Path2D();
-    for (let i = 0; i < 16; i++) {
-      const x = 60 + sr() * 880, y = 600 + sr() * 150, s = 8 + (y - 560) * 0.12;
-      disc(x, y, s, hedge); disc(x + s * 0.8, y + 2, s * 0.75, hedge);
-    }
-    const foreground = ridge(ridgeAt(850, sr, 14, 7, 0), 960);
-    const swath = path([[drone.x, drone.y + 30], [110, 900], [640, 900]], true);
-    const craft = new Path2D();
-    for (const [a, b] of [[[-75, -19], [75, 19]], [[-75, 19], [75, -19]]]) {
-      craft.addPath(path([[drone.x + a[0], drone.y + a[1] - 3.5], [drone.x + b[0], drone.y + b[1] - 3.5], [drone.x + b[0], drone.y + b[1] + 3.5], [drone.x + a[0], drone.y + a[1] + 3.5]], true));
-    }
-    craft.addPath(ellipse(drone.x, drone.y, 28, 15));
-    for (const sx of [-1, 1]) for (const sy of [-1, 1]) craft.addPath(ellipse(drone.x + sx * 75, drone.y + sy * 19, 30, 7));
-    craft.addPath(rect(drone.x - 7, drone.y + 10, 14, 14));
-    const tower = path([[mast.x - 20, mast.base], [mast.x - 4, mast.top], [mast.x + 4, mast.top], [mast.x + 20, mast.base]], true);
-    const packets = new Path2D();
-    [20, 17, 14, 11, 9, 7, 5].forEach((s, i, all) => {
-      const t = (i + 1) / (all.length + 1);
-      const x = drone.x + 90 + (mast.x - drone.x - 110) * t, y = drone.y + (mast.top - 40 - drone.y) * t - Math.sin(t * Math.PI) * 70;
-      packets.rect(x - s / 2, y - s / 2, s, s);
-    });
-    const birds = new Path2D();
-    for (const [bx, by, s] of [[600, 300, 9], [625, 290, 7], [645, 306, 8]]) {
-      birds.moveTo(bx - s, by - s * 0.4); birds.quadraticCurveTo(bx - s * 0.4, by - s * 0.6, bx, by); birds.quadraticCurveTo(bx + s * 0.4, by - s * 0.6, bx + s, by - s * 0.4);
+    const road = new Path2D();
+    road.moveTo(392, 653); road.bezierCurveTo(398, 721, 481, 759, 513, 806);
+    road.quadraticCurveTo(557, 856, 594, 928);
+    const plume = cut([[267, 719], [251, 680], [274, 636], [301, 601], [305, 559],
+      [348, 523], [363, 484], [421, 449], [481, 420], [481, 455], [440, 489],
+      [418, 532], [375, 555], [350, 598], [327, 645], [291, 719]], sr, 1.8);
+    const flames = new Path2D(), fireCores = new Path2D();
+    for (const [x, y, w, h] of [[252, 746, 22, 53], [283, 750, 25, 68], [312, 745, 19, 46]]) {
+      flames.addPath(heroFlame(x, y, w, h));
+      fireCores.addPath(heroFlame(x, y - 2, w * 0.35, h * 0.45));
     }
 
+    const footprint = ellipse(foot.x, foot.y, foot.rx, foot.ry);
+    const cone = new Path2D();
+    cone.moveTo(dx, dy + 43);
+    cone.lineTo(foot.x - foot.rx, foot.y);
+    cone.ellipse(foot.x, foot.y, foot.rx, foot.ry, 0, Math.PI, 0, true);
+    cone.closePath();
+    const sightlines = path([[foot.x - foot.rx, foot.y], [dx, dy + 43], [foot.x + foot.rx, foot.y]]);
+
+    // Open rotor rings, motor hubs, a two-tone fuselage and a camera make the UAV unmistakable.
+    const craft = new Path2D(), rotors = new Path2D(), motors = new Path2D();
+    for (const sy of [-1, 1]) {
+      craft.addPath(path([[dx - 99, dy + sy * 29 - 5], [dx + 99, dy - sy * 29 - 5],
+        [dx + 99, dy - sy * 29 + 5], [dx - 99, dy + sy * 29 + 5]], true));
+      for (const sx of [-1, 1]) {
+        const x = dx + sx * 99, y = dy + sy * 29;
+        rotors.addPath(ellipse(x, y, 43, 12));
+        motors.addPath(ellipse(x, y, 8, 6));
+      }
+    }
+    const body = cut([[dx - 37, dy - 12], [dx - 15, dy - 23], [dx + 29, dy - 15],
+      [dx + 39, dy + 5], [dx + 16, dy + 19], [dx - 28, dy + 15]], sr, 0.6);
+    craft.addPath(body);
+    const camera = rounded(dx - 13, dy + 21, 26, 22, 5);
+    const skids = path([[dx - 24, dy + 13], [dx - 30, dy + 37], [dx - 46, dy + 37]]);
+    skids.addPath(path([[dx + 25, dy + 13], [dx + 34, dy + 34], [dx + 48, dy + 34]]));
+
+    // A recognizable image becomes one small file. The size change explains compression.
+    const snapshot = rounded(450, 205, 126, 110, 8);
+    const packet = path([[632, 236], [662, 236], [678, 252], [678, 294], [632, 294]], true);
+    const fold = path([[662, 236], [662, 252], [678, 252]]);
+    const uplink = new Path2D();
+    uplink.moveTo(dx + 143, dy - 29);
+    uplink.quadraticCurveTo(416, 260, 439, 260);
+    const compressArrow = arrow(590, 264, 619, 264, 10);
+    const taper = path([[584, 224], [624, 248], [624, 280], [584, 303]], true);
+    // One generous arc carries the compact packet directly to the edge server.
+    const route = new Path2D();
+    route.moveTo(692, 264);
+    route.bezierCurveTo(786, 264, 825, 342, 825, 438);
+
+    // Three rack units, vents, status lights and a side panel give the server a clear silhouette.
+    const cabinet = rounded(edge.x, edge.y, edge.w, edge.h, 8);
+    const side = path([[edge.x + edge.w, edge.y], [edge.x + edge.w + 24, edge.y - 18],
+      [edge.x + edge.w + 24, edge.y + edge.h - 18], [edge.x + edge.w, edge.y + edge.h]], true);
+    const top = path([[edge.x, edge.y], [edge.x + 24, edge.y - 18],
+      [edge.x + edge.w + 24, edge.y - 18], [edge.x + edge.w, edge.y]], true);
+    const bays = [0, 1, 2].map(i => rounded(edge.x + 15, edge.y + 23 + i * 59, edge.w - 30, 46, 4));
+    const feet = new Path2D();
+    feet.rect(edge.x + 16, edge.y + edge.h, 24, 10);
+    feet.rect(edge.x + edge.w - 40, edge.y + edge.h, 24, 10);
+    const result = rounded(590, 575, 132, 114, 8);
+    const resultArrow = arrow(edge.x - 8, 632, 732, 632, 8);
+
     inWindow(g, HERO, () => {
-      sky(g, ink, HERO, horizon);
+      sky(g, ink, HERO, horizon, 0.3);
       if (ink === 'yellow') {
-        shade(g, rect(0, 0, 1000, 920), radial(g, 705, 395, 330, [[0, 0.7], [0.5, 0.3], [1, 0]]));
-        print(g, sun, 1);
-        carve(g, far);
-        carve(g, fields); print(g, fields, 0.55);
-        patches.forEach(([p, kind]) => plane(g, p, [0.85, 0.5, 0.75, 0.3][kind]));
-        g.save(); g.clip(swath); print(g, fields, 0.25); g.restore();
-        carve(g, hedge); carve(g, foreground);
-        carve(g, craft); carve(g, packets); carve(g, tower);
+        carve(g, far); plane(g, ground, 0.3); print(g, woodland, 0.2);
+        print(g, cone, 0.1); print(g, footprint, 0.16);
       }
       if (ink === 'pink') {
-        carve(g, sun); print(g, sun, 0.55);
-        plane(g, far, 0.3); plane(g, mid, 0.18);
-        carve(g, fields); print(g, fields, 0.06);
-        carve(g, craft); carve(g, tower);
-        carve(g, packets); print(g, packets, 1);
+        plane(g, far, 0.14); plane(g, mid, 0.08); plane(g, ground, 0.045);
       }
       if (ink === 'green') {
-        carve(g, fields);
-        print(g, fields, 0.4);
-        patches.forEach(([p, kind]) => plane(g, p, [0.12, 0.6, 0.3, 0.72][kind]));
-        print(g, hedge, 0.95);
+        print(g, ground, 0.1); print(g, woodland, 0.28); print(g, trees, 0.85);
       }
       if (ink === 'blue') {
-        carve(g, sun);
-        plane(g, far, 0.3); plane(g, mid, 0.42);
-        carve(g, fields);
-        patches.forEach(([p, kind]) => print(g, p, [0, 0.12, 0.05, 0.2][kind]));
-        plane(g, foreground, 0.55);
-        carve(g, craft); carve(g, packets); carve(g, tower);
+        plane(g, far, 0.2); plane(g, mid, 0.28); carve(g, ground); print(g, trees, 0.14);
+      }
+      carveLine(g, road, 24);
+      if (ink === 'indigo') { keyline(g, road, 24, 0.08); dashed(g, road, [8, 11], 1.6, 0.5); }
+      for (const [x, y, size] of [[426, 670, 0.75], [449, 730, 0.95], [388, 769, 1.05], [493, 837, 1.1]]) {
+        heroHouse(g, ink, x, y, size);
+      }
+      // Smoke drifts above the fire, while the homes remain visibly outside the burning area.
+      carve(g, plume); carve(g, flames);
+      if (ink === 'indigo') shade(g, plume, linear(g, 276, 719, 469, 430, [[0, 0.62], [0.5, 0.34], [1, 0.12]]));
+      if (ink === 'yellow') print(g, flames, 1);
+      if (ink === 'pink') { print(g, flames, 0.8); carve(g, fireCores); }
+
+      // Knock the equipment out of the landscape inks so its fine details stay crisp.
+      for (const shape of [craft, motors, camera, snapshot, packet, cabinet, side, top, feet, result]) carve(g, shape);
+      carveLine(g, rotors, 5.5);
+      if (ink === 'blue') { print(g, side, 0.24); print(g, top, 0.1); }
+      if (ink === 'pink') {
+        print(g, taper, 0.1); keyline(g, compressArrow, 3.5);
+        print(g, packet, 0.85); carveLine(g, fold, 2.5);
+        for (const y of [266, 277]) carveLine(g, path([[643, y], [664, y]]), 3);
+        keyline(g, packet, 2.5);
+        dashed(g, route, [9, 10], 3.5, 1);
+        keyline(g, arrow(825, 438, 825, edge.y - 30, 14), 3.5);
+        print(g, rounded(dx - 15, dy - 14, 36, 10, 4), 0.8);
+      }
+      if (ink === 'green') {
+        for (let i = 0; i < 3; i++) print(g, disc(edge.x + edge.w - 31, edge.y + 46 + i * 59, 5));
       }
       if (ink === 'indigo') {
-        print(g, mid, 0.08);
-        g.lineCap = 'round';
-        keyline(g, birds, 2.4, 0.9);
-        plane(g, foreground, 0.85);
-        print(g, craft, 1);
-        print(g, tower, 1);
-        carve(g, path([[mast.x - 8, mast.base - 20], [mast.x, mast.top + 70], [mast.x + 8, mast.base - 20]], true));
-        keyline(g, ellipse(mast.x + 16, mast.top + 18, 15, 22), 4);
-        for (const r of [26, 40, 54]) { const p = new Path2D(); p.arc(mast.x, mast.top - 16, r, -2.7, -0.45); keyline(g, p, 2.4, 0.8); }
-        keyline(g, packets, 1.6, 0.7);
+        dashed(g, sightlines, [7, 9], 2, 0.65);
+        dashed(g, footprint, [7, 8], 2.4, 0.9);
+        print(g, craft); carve(g, rounded(dx - 15, dy - 14, 36, 10, 4));
+        keyline(g, rotors, 4); print(g, motors); keyline(g, skids, 4);
+        print(g, camera); carve(g, disc(dx, dy + 32, 6));
+        keyline(g, snapshot, 3.5);
+        keyline(g, uplink, 2.5, 0.75);
+        keyline(g, arrow(426, 260, 439, 260, 8), 2.5, 0.75);
+        keyline(g, top, 3); keyline(g, side, 3); keyline(g, cabinet, 4);
+        bays.forEach(bay => keyline(g, bay, 3));
+        for (let i = 0; i < 3; i++) for (const offset of [37, 48]) {
+          keyline(g, path([[edge.x + 28, edge.y + offset + i * 59],
+            [edge.x + 83, edge.y + offset + i * 59]]), 3);
+        }
+        print(g, feet);
+        keyline(g, result, 3); keyline(g, resultArrow, 3);
       }
+      heroObservation(g, ink, 458, 213, 110, 94);
+      heroObservation(g, ink, 598, 583, 116, 98, true);
     });
   },
   annotate(g) {
-    rule(g, [[320, 280], [110, 880]], 'indigo', 0.45); rule(g, [[320, 280], [640, 880]], 'indigo', 0.45);
-    compass(g, 100, 118);
-    label(g, '01 / SENSE', 170, 168, 20); rule(g, [[170, 180], [238, 180], [262, 214]]);
-    label(g, '02 / COMPRESS', 468, 180, 18, 'pink');
-    label(g, '03 / INFER', 832, 298, 20, 'indigo', 'center');
+    // Set explanations directly in unscreened ink, above the drone and packet and below the server.
+    label(g, '01 SENSE', 104, 158, 30);
+    label(g, 'Monitor homes near', 104, 190, 24);
+    label(g, 'wildland vegetation.', 104, 220, 24);
+    label(g, '02 COMPRESS', 450, 102, 30, 'pink');
+    label(g, 'Preserve fire cues.', 450, 134, 24, 'pink');
+    label(g, 'Send a smaller packet.', 450, 164, 24, 'pink');
+    label(g, '03 INFER', 592, 787, 30);
+    label(g, 'Detect fire and smoke', 592, 819, 24);
+    label(g, 'at the edge server.', 592, 849, 24);
   },
 };
 

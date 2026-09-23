@@ -1,0 +1,44 @@
+---
+import { designOf, projectKicker, type Entry } from '../lib/content';
+interface Props { projects: Entry[]; current?: string[]; }
+const { projects, current = [] } = Astro.props;
+---
+<section class="research-carousel" data-research-carousel aria-labelledby="research" aria-roledescription="carousel">
+  <div class="carousel-heading">
+    <h2 class="label-heading" id="research">Research</h2>
+    <div class="carousel-controls" hidden>
+      <span class="carousel-count" aria-hidden="true"><span data-carousel-count>01</span> / {String(projects.length).padStart(2, '0')}</span>
+      <button type="button" class="carousel-arrow" data-carousel-prev aria-label="Previous research project" aria-controls="research-slides" disabled><span aria-hidden="true">←</span></button>
+      <button type="button" class="carousel-arrow" data-carousel-next aria-label="Next research project" aria-controls="research-slides"><span aria-hidden="true">→</span></button>
+    </div>
+  </div>
+  <ol class="plate-index carousel-track" id="research-slides" aria-label="Research projects" tabindex="0">
+    {projects.map((project, i) => (
+      <li data-carousel-slide data-title={designOf(project).title} aria-label={`${i + 1} of ${projects.length}`}>
+        <a class="plate-item" href={project.path} data-plate={project.slug}>
+          <span class="plate-body">
+            <span class="plate-title">{designOf(project).title}</span>
+            <span class="plate-meta">{projectKicker[project.slug] ?? project.title}{current.includes(project.slug) && <span class="plate-current">Current</span>}</span>
+            <span class="plate-summary">{project.summary}</span>
+            <span class="carousel-project-link">Explore project <span aria-hidden="true">↗</span></span>
+          </span>
+          <span class="plate-thumb" aria-hidden="true"><canvas data-riso={project.slug}></canvas></span>
+        </a>
+      </li>
+    ))}
+  </ol>
+  <div class="carousel-footer">
+    <div class="carousel-dots" role="group" aria-label="Choose a research project" hidden>
+      {projects.map((project, i) => (
+        <button type="button" data-carousel-index={i} aria-label={`Show ${designOf(project).title}`} aria-controls="research-slides" aria-current={i === 0 ? 'true' : undefined}><span></span></button>
+      ))}
+    </div>
+    <a class="section-link" href="/projects/">All research <span aria-hidden="true">↗</span></a>
+  </div>
+  <p class="sr-only" data-carousel-status aria-live="polite" aria-atomic="true"></p>
+</section>
+
+<script>
+  import { initResearchCarousels } from '../scripts/research-carousel';
+  initResearchCarousels();
+</script>

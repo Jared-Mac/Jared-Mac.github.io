@@ -9,14 +9,23 @@ import { publications, projects } from '../lib/content';
     <LightTable
       projects={projects}
       current={['mantis', 'shield']}
-      lead={{ scene: 'hero', caption: 'From the field to the edge', label: 'A drone over farmland at golden hour sends shrinking packets of compressed data to an edge-computing mast.' }}
+      carousel
+      lead={{
+        scene: 'hero',
+        caption: 'Wildfire sensing at the wildland–urban interface',
+        label: 'A UAV observes a wildfire near homes at the edge of wooded hills. Flames and a rising smoke plume appear in its camera footprint and captured image. A compact data packet travels to an edge server, whose result highlights fire and smoke beside the neighborhood.',
+        steps: [
+          { title: 'Sense', description: 'The UAV captures imagery where homes meet wildland vegetation.' },
+          { title: 'Compress', description: 'Task-relevant fire and smoke cues are compressed for the wireless link.' },
+          { title: 'Infer', description: 'The edge server analyzes the received data for fire and smoke near homes.' },
+        ],
+      }}
     >
       <header class="statement-block">
         <h1 class="statement"><span class="statement-name">Jared Macshane</span> builds machine-learning systems for places where bandwidth, computation, and time are <em>limited.</em></h1>
         <p class="statement-meta">PhD student · Distributed Systems Middleware Group · UC Irvine</p>
         <p class="statement-links"><a href="mailto:jmacshan@uci.edu">Email</a><a href="/uploads/resume.pdf">CV</a><a href="https://github.com/Jared-Mac">GitHub</a><a href="https://www.linkedin.com/in/jared-macshane-733971b9">LinkedIn</a></p>
       </header>
-      <h2 class="label-heading" id="research">Research</h2>
     </LightTable>
 
     <section class="quiet-section" aria-labelledby="writing-title">

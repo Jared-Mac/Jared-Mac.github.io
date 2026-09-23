@@ -1,10 +1,17 @@
 ---
 /* One print at a time: a numbered research index beside a single sticky riso print. Pointing at
    or focusing a project swaps the print and quiets the other titles; leaving the list returns to
-   the default plate. On narrow screens the stage is dropped and each entry carries its own print. */
+   the default plate. On narrow screens the lead stays visible and each entry carries its own print. */
 import { designOf, projectKicker, type Entry } from '../lib/content';
-interface Props { projects: Entry[]; current?: string[]; lead?: { scene: string; caption: string; label: string }; summaries?: boolean; }
-const { projects, current = [], lead, summaries = false } = Astro.props;
+import ResearchCarousel from './ResearchCarousel.astro';
+interface Props {
+  projects: Entry[];
+  current?: string[];
+  lead?: { scene: string; caption: string; label: string; steps?: { title: string; description: string }[] };
+  summaries?: boolean;
+  carousel?: boolean;
+}
+const { projects, current = [], lead, summaries = false, carousel = false } = Astro.props;
 const plates = [
   ...(lead ? [{ id: lead.scene, caption: lead.caption, number: '00', hero: true }] : []),
   ...projects.map((p, i) => ({ id: p.slug, caption: designOf(p).figure, number: String(i + 1).padStart(2, '0'), hero: false })),
@@ -14,7 +21,7 @@ const first = plates[0];
 <div class="light-table" data-light-table data-default={first.id}>
   <div class="table-text">
     <slot />
-    <ol class="plate-index" aria-label="Research projects">
+    {carousel ? <ResearchCarousel projects={projects} current={current} /> : <ol class="plate-index" aria-label="Research projects">
       {projects.map((project, i) => (
         <li>
           <a class="plate-item" href={project.path} data-plate={project.slug}>
@@ -28,7 +35,7 @@ const first = plates[0];
           </a>
         </li>
       ))}
-    </ol>
+    </ol>}
   </div>
   <figure class:list={['table-stage', { 'is-plain': !lead }]} aria-hidden={lead ? undefined : 'true'}>
     <div class="stage-frame">
@@ -43,7 +50,19 @@ const first = plates[0];
         ></canvas>
       ))}
     </div>
-    <figcaption class="stage-caption" aria-hidden="true">{`${first.number} — ${first.caption}`}</figcaption>
+    <figcaption>
+      <p class="stage-caption" aria-hidden="true">{`${first.number} — ${first.caption}`}</p>
+      {lead?.steps && (
+        <ol class="stage-key" aria-label="From sensing to inference">
+          {lead.steps.map((step, i) => (
+            <li>
+              <span class="stage-key-title"><span class="stage-key-number" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>{step.title}</span>
+              <span class="stage-key-description">{step.description}</span>
+            </li>
+          ))}
+        </ol>
+      )}
+    </figcaption>
   </figure>
 </div>
 
@@ -51,8 +70,10 @@ const first = plates[0];
   document.querySelectorAll<HTMLElement>('[data-light-table]').forEach(table => {
     const plates = [...table.querySelectorAll<HTMLCanvasElement>('[data-stage]')];
     const caption = table.querySelector('.stage-caption')!;
-    const list = table.querySelector('.plate-index')!;
+    const list = table.querySelector('[data-research-carousel]') ?? table.querySelector('.plate-index')!;
+    const compact = matchMedia('(max-width: 860px)');
     const show = (id: string) => {
+      if (compact.matches) id = table.dataset.default!;
       plates.forEach(p => p.classList.toggle('is-active', p.dataset.stage === id));
       const active = plates.find(p => p.dataset.stage === id);
       if (active) caption.textContent = active.dataset.caption!;
@@ -65,5 +86,7 @@ const first = plates[0];
     });
     list.addEventListener('pointerleave', () => show(table.dataset.default!));
     list.addEventListener('focusout', e => { if (!list.contains((e as FocusEvent).relatedTarget as Node)) show(table.dataset.default!); });
+    table.addEventListener('research:select', e => show((e as CustomEvent<{ scene: string }>).detail.scene));
+    compact.addEventListener('change', () => show(table.dataset.default!));
   });
 </script>
