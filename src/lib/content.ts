@@ -41,6 +41,14 @@ export const authors = (entry: Entry) => entry.authors?.map(name => name === 'ad
 export const projectKicker: Record<string, string> = {
   mantis: 'Task-informed neural compression', shield: 'Community-scale digital twins', wildfire: 'Resource-aware environmental sensing', 'trail-mapping': 'Geospatial machine learning', 'vr-labs': 'Immersive science education',
 };
+/** Captions for each project's riso figure, saying what is measured and what is illustrative. */
+export const projectFigure: Record<string, string> = {
+  mantis: 'Top: the data path from the paper’s Fig. 1. A frame passes through the shared stem into the cGDN-modulated encoder (its ten conditioning sites in red), while the TaskDetector’s P_task drives the modulator; the latent ẑ crosses the uplink and fans out to task decoder–head chains, here routed to smoke detection. Bottom: measured mean bitrate per latent channel for urban segmentation (teal), wildlife detection (blue) and fire/smoke detection (red), from the paper’s channel-usage analysis.',
+  shield: 'Illustration: the city below and its digital twin above. Rooftop sensors stream observations up to the twin, where a flood simulation (dashed line) runs ahead of the water level observed on the ground.',
+  wildfire: 'Illustration: seven sampled fire perimeters from one ignition, as a conditional generative spread model produces them. Ink accumulates where samples agree, the lake stops every sample, and dashed isochrones follow the mean perimeter over time.',
+  'trail-mapping': 'A real run of the growing self-organizing map on synthetic trails: 820 anonymous GPS fixes (red) and the collapsed, smoothed network of neurons (blue), with junction neurons filled. The dashed ring marks the neighbourhood radius r.',
+  'vr-labs': 'Illustration: an overhead tracking camera’s view of a lab bench. Each object carries an ArUco-style marker, and each detection is outlined with its corners and pose axes (x red, y teal, z toward the camera).',
+};
 export const projectImage = (slug: string) => slug === 'mantis' ? '/uploads/mantis/architecture.png' : null;
 export const canonicalPaths = ['/', '/projects/', '/publications/', '/experience/', '/tags/', ...projects.map(p => p.path), ...publications.map(p => p.path), ...tags.map(t => `/tags/${slugify(t)}/`)];
 export const xmlEscape = (s: string) => s.replace(/[<>&"']/g, c => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;', "'": '&apos;' })[c]!);

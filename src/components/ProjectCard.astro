@@ -1,9 +1,11 @@
 ---
-import type { Entry } from '../lib/content';
+import { projectKicker, type Entry } from '../lib/content';
 interface Props { project: Entry; index?: number; }
 const { project } = Astro.props;
 ---
 <article class="project-card">
+  <div class="print"><canvas data-riso={project.slug} aria-hidden="true"></canvas></div>
+  <p class="card-kicker">{project.year} · {projectKicker[project.slug]}</p>
   <h3><a href={project.path}>{project.title}</a></h3>
   <p>{project.summary}</p>
 </article>

@@ -1,35 +1,48 @@
 ---
 import Base from '../layouts/Base.astro';
 import PublicationRow from '../components/PublicationRow.astro';
-import { publications } from '../lib/content';
+import ProjectCard from '../components/ProjectCard.astro';
+import { publications, projects, profile } from '../lib/content';
+const current = projects.filter(p => ['mantis', 'shield'].includes(p.slug));
+const interests = profile.data.interests as string[];
 ---
 <Base>
   <div class="wrap home-page">
-    <section class="profile">
+    <section class="intro">
       <div>
-        <h1>Jared Macshane</h1>
-        <p class="affiliation">PhD Student in Computer Science<br /><a href="https://uci.edu/">University of California, Irvine</a></p>
-        <div class="profile-links"><a href="mailto:jmacshan@uci.edu">Email</a><a href="/uploads/resume.pdf">CV</a><a href="https://github.com/Jared-Mac">GitHub</a><a href="https://www.linkedin.com/in/jared-macshane-733971b9">LinkedIn</a></div>
+        <p class="kicker">PhD Student in Computer Science · <a href="https://uci.edu/">University of California, Irvine</a></p>
+        <h1 class="riso-title" data-text="Jared Macshane">Jared Macshane</h1>
+        <div class="bio-text">
+          <p>I am a PhD student in the Distributed Systems Middleware Group at UC Irvine. My research focuses on distributed machine-learning systems for resource-constrained edge environments, particularly task-informed neural compression and progressive inference.</p>
+          <p>I study how sensing platforms can preserve task accuracy while reducing communication and computation costs, with applications in environmental monitoring and disaster resilience. Previously, I worked on geospatial machine learning at CSU San Marcos and computer vision for wildlife conservation at the San Diego Zoo Wildlife Alliance.</p>
+        </div>
+        <div class="profile-links"><a class="stamp" href="mailto:jmacshan@uci.edu">Email</a><a class="stamp" href="/uploads/resume.pdf">CV</a><a class="stamp" href="https://github.com/Jared-Mac">GitHub</a><a class="stamp" href="https://www.linkedin.com/in/jared-macshane-733971b9">LinkedIn</a></div>
       </div>
-      <img class="profile-photo" src="/images/jared.jpg" alt="Jared Macshane" width="960" height="720" fetchpriority="high" />
+      <figure class="portrait">
+        <canvas data-riso-photo="#portrait-photo" data-crop="170 200 440 520" aria-hidden="true"></canvas>
+        <img id="portrait-photo" src="/images/jared.jpg" alt="Jared Macshane" width="960" height="720" fetchpriority="high" />
+        <figcaption>Akihabara, Tokyo</figcaption>
+      </figure>
     </section>
-    <div class="bio-text">
-      <p>I am a PhD student in the Distributed Systems Middleware Group at UC Irvine. My research focuses on distributed machine-learning systems for resource-constrained edge environments, particularly task-informed neural compression and progressive inference.</p>
-      <p>I study how sensing platforms can preserve task accuracy while reducing communication and computation costs, with applications in environmental monitoring and disaster resilience. Previously, I worked on geospatial machine learning at CSU San Marcos and computer vision for wildlife conservation at the San Diego Zoo Wildlife Alliance.</p>
-    </div>
+
+    <figure class="plate">
+      <canvas data-riso="hero" role="img" aria-label="Risograph-style illustration: a drone hovers over a mountain range at dusk and sends a stream of shrinking packets to an edge-computing mast on the near ridge."></canvas>
+      <figcaption class="plate-caption"><span><b>Plate 01</b> Split inference over the ridge</span><span>A UAV sends compact latents, not frames, to the edge.</span></figcaption>
+    </figure>
+
     <section class="section">
       <h2>Research interests</h2>
-      <p>Edge and split computing; neural compression; progressive inference; digital twins; computer vision.</p>
+      <ul class="chips">{interests.map(interest => <li>{interest}</li>)}</ul>
     </section>
     <section class="section">
-      <h2>Current research</h2>
-      <p class="research-summary"><a href="/project/mantis/">MANTIS</a> develops task-informed neural compression for UAV split inference. <a href="/project/shield/">SHIELD</a> connects edge sensing, simulation, and visualization in community-scale digital twins for disaster resilience.</p>
-      <p class="section-link"><a href="/projects/">Research projects</a></p>
+      <div class="section-heading"><h2>Current research</h2></div>
+      <div class="project-grid">{current.map(project => <ProjectCard project={project} />)}</div>
+      <p class="section-link"><a href="/projects/">All research projects →</a></p>
     </section>
     <section class="section">
-      <h2>Selected publications and manuscripts</h2>
+      <div class="section-heading"><h2>Selected publications</h2></div>
       <div>{publications.filter(p => p.featured).map(entry => <PublicationRow entry={entry} />)}</div>
-      <p class="section-link"><a href="/publications/">Complete publication list</a></p>
+      <p class="section-link"><a href="/publications/">Complete publication list →</a></p>
     </section>
   </div>
 </Base>
