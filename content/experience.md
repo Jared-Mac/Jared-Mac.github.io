@@ -26,6 +26,14 @@ sections:
             - Lead SHIELD digital twin work for disaster resilience and resource-aware inference
             - Build progressive inference models for constrained sensing platforms
 
+        - title: Software Engineer
+          company: Fixstars Solutions Inc.
+          date_start: '2026-07'
+          date_end: '2026-09'
+          description: |
+            - Contributed to a hybrid retrieval-augmented generation (RAG) system and the CAD LLM Harness
+            - Implemented custom Autoware features and streamlined container builds
+
         - title: Research Engineer Intern
           company: Fixstars Solutions Inc.
           company_url: ''
@@ -69,8 +77,8 @@ sections:
         - title: Research Fellow
           company: San Diego Zoo Wildlife Alliance - Conservation Lab
           company_url: ''
-          date_start: '2021-01-01'
-          date_end: '2021-12-31'
+          date_start: '2021-05'
+          date_end: '2021-10'
           description: |
             - Developed a real-time computer-vision framework for wildlife monitoring
             - Combined object detector and image classifier models for automated review

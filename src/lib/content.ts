@@ -7,7 +7,7 @@ export interface Entry {
   slug: string; path: string; title: string; summary: string; body: string;
   tags: string[]; date: string; year: string; draft?: boolean; featured?: boolean;
   abstract?: string; authors?: string[]; doi?: string; publication?: string;
-  publication_short?: string; url_pdf?: string; url_code?: string; url_project?: string;
+  publication_short?: string; url_pdf?: string; url_code?: string; url_project?: string; url_program?: string;
   publication_status?: string; publication_types?: string[];
   components?: { name: string; focus: string; summary: string; url: string }[];
 }

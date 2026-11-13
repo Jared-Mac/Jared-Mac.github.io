@@ -13,7 +13,7 @@ superuser: true
 highlight_name: true
 
 # Role/position/tagline
-role: PhD Student in Computer Science
+role: PhD Candidate in Computer Science
 
 # Organizations/Affiliations to display in Biography blox
 organizations:
@@ -39,7 +39,7 @@ interests:
   - Computer Vision
 
 education:
-  - area: PhD in Computer Science
+  - area: PhD Candidate in Computer Science
     institution: University of California, Irvine
     date_start: 2023-01-01
     date_end: ''
@@ -68,6 +68,14 @@ work:
       - Task-informed neural compression for split computing
       - Progressive inference for wildfire intelligence and disaster resilience
       - Community-scale digital twins and edge visualization
+
+  - position: Software Engineer
+    company_name: Fixstars Solutions Inc.
+    date_start: '2026-07'
+    date_end: '2026-09'
+    summary: |
+      - Contributed to a hybrid retrieval-augmented generation (RAG) system and the CAD LLM Harness
+      - Implemented custom Autoware features and streamlined container builds
 
   - position: Research Engineer Intern
     company_name: Fixstars Solutions Inc.
@@ -181,7 +189,7 @@ awards:
 
 ## About Me
 
-I am a PhD student at UC Irvine in the Distributed Systems Middleware Group. My research develops distributed machine-learning systems for resource-constrained edge and split-computing environments, with a focus on adaptive neural compression, progressive inference, and task-informed deployment.
+I am a PhD candidate at UC Irvine in the Distributed Systems Middleware Group. My research develops distributed machine-learning systems for resource-constrained edge and split-computing environments, with a focus on adaptive neural compression, progressive inference, and task-informed deployment.
 
 My current work centers on MANTIS, a task-informed neural compression system for UAV split inference, and SHIELD, a community-scale digital twin platform for disaster resilience. Across these projects, I work on systems that decide what evidence to send, when to process it locally, and how to preserve downstream task accuracy under limited connectivity.
 

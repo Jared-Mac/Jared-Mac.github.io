@@ -5,6 +5,7 @@ export function getStaticPaths() {
     ['project', '/projects/'], ['publication', '/publications/'], ['authors', '/experience/'],
     ['author/jared-macshane', '/experience/'], ['author/admin', '/experience/'],
     ['project/page/1', '/projects/'], ['publication/page/1', '/publications/'],
+    ['publication/preprint/mantis', '/publication/conference-paper/mantis/'],
     ['publication_types', '/publications/'],
     ...['1', '2', '3'].flatMap(type => [[`publication_types/${type}`, '/publications/'], [`publication_types/${type}/page/1`, '/publications/']]),
     ...tags.map(tag => [`tags/${slugify(tag)}/page/1`, `/tags/${slugify(tag)}/`]),

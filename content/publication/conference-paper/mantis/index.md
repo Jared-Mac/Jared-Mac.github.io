@@ -2,19 +2,18 @@
 title: "MANTIS: Modulated Adaptive Neural Compression for Task-Informed Split Computing"
 authors:
 - admin
-- et al.
-date: "2026-01-01"
+- Nalini Venkatasubramanian
+date: "2026-10-14"
 doi: ""
 
 publication_types: ["1"]
 
-publication: "SEC (forthcoming)"
-publication_short: "SEC (forthcoming)"
-publication_status: forthcoming
+publication: "Proceedings of the 11th ACM/IEEE Symposium on Edge Computing (SEC)"
+publication_short: "SEC 2026"
 
 abstract: "MANTIS is a task-informed split-computing system for neural compression. A lightweight client-side task detector estimates task relevance, a conditional analysis transform injects that signal through Conditional Generalized Divisive Normalization, and task-specific entropy bottlenecks and edge heads decode compact task-shaped latents for UAV perception workloads."
 
-summary: "Task-informed neural compression for UAV split inference across urban segmentation, wildlife detection, and wildfire monitoring. Forthcoming at SEC."
+summary: "Task-informed neural compression for UAV split inference across urban segmentation, wildlife detection, and wildfire monitoring."
 
 tags:
 - Edge Computing
@@ -29,7 +28,7 @@ url_dataset: ''
 url_poster: ''
 url_project: '/project/mantis/'
 url_slides: ''
-url_source: ''
+url_program: 'https://acm-ieee-sec.org/2026/program.php'
 url_video: ''
 
 projects:
